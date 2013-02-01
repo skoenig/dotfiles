@@ -7,3 +7,6 @@
 [submodule "bundle/pyflakes"]
 	path = bundle/pyflakes
 	url = git://github.com/kevinw/pyflakes-vim.git
+[submodule "bundle/gnupg"]
+	path = bundle/gnupg
+	url = git://gitorious.org/vim-gnupg/vim-gnupg.git
