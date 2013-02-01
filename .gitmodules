@@ -10,3 +10,6 @@
 [submodule "bundle/gnupg"]
 	path = bundle/gnupg
 	url = git://gitorious.org/vim-gnupg/vim-gnupg.git
+[submodule "bundle/vimwiki"]
+	path = bundle/vimwiki
+	url = https://github.com/weierophinney/vimwiki.git
