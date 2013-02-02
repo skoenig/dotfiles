@@ -1,0 +1,131 @@
+" When started as "evim", evim.vim will already have done these settings.
+if v:progname =~? "evim"
+  finish
+endif
+
+" Use Vim settings, rather then Vi settings (much better!).
+" This must be first, because it changes other options as a side effect.
+set nocompatible
+
+" set color scheme
+if $DISPLAY != '' || $TERM == 'xterm' || $TERM == 'xterm-color' || $TERM == 'screen'
+  set t_Co=256 " use 256 colors
+  colorscheme molokai
+else
+  colorscheme torte
+endif
+
+" enable mouse in all modes
+"set mouse=a
+
+
+
+" Activate auto filetype detection
+syntax on             " Enable syntax highlighting
+filetype on           " Enable filetype detection
+filetype indent on    " Enable filetype-specific indenting
+filetype plugin on    " Enable filetype-specific plugins
+
+set encoding=utf-8    " set encoding to unicode
+"set textwidth=220     " text is displayed 120 chars a line 
+set nowrap            " don't show long lines wrapped
+set autoindent        " Enable automatic indenting for files with ft set
+
+set history=100       " keep 100 lines of command line history
+set backspace=indent,eol,start " allow backspacing over everything in insert mode
+set incsearch         " do incremental searching
+set hlsearch          " highlight matched search patterns
+set showmatch         " Jump to matching bracket
+set ignorecase        " No case in searches (has to be set for option 'smartcase')
+set smartcase         " No case in searches, unless the query contains upper case characters
+set hidden            " Let us move between buffers without writing them.  Don't :q! or :qa! frivolously!
+set laststatus=2      " Always show filename (2 is always)
+set number            " show line numbers
+set ruler             " show the cursor position all the time
+set showcmd           " Show command in statusline as it's being typed
+set cursorline        " highlight current line
+
+set writebackup
+set backupdir=$HOME/.vimbackup/
+
+set tabstop=4         " spaces to set tabwidth to
+set softtabstop=4     " spaces Vim sees as a tab
+set shiftwidth=4      " amout of spaces < and > uses
+set expandtab         " convert tabs to spaces
+
+set foldmethod=marker   " automatically fold by marker {{{ }}}
+set foldenable          " all folds closed by default
+
+" Switch buffers
+map <C-Right> :bn<CR>
+map <C-Left>  :bp<CR>
+
+" Shift lines up and down in (n)ormal, (i)nsert and (v)isual modi
+nnoremap <C-j> mz:m+<CR>`z
+nnoremap <C-k> mz:m-2<CR>`z
+inoremap <C-j> <Esc>:m+<CR>gi
+inoremap <C-k> <Esc>:m-2<CR>gi
+vnoremap <C-j> :m'>+<CR>gv=`<my`>mzgv`yo`z
+vnoremap <C-k> :m'<-2<CR>gv=`>my`<mzgv`yo`z
+
+" Don't use Ex mode, use Q for formatting
+map Q gq
+
+" CTRL-U in insert mode deletes a lot. Use CTRL-G u to first break undo,
+" so that you can undo CTRL-U after inserting a line break.
+inoremap <C-U> <C-G>u<C-U>
+
+" Convenient command to see the difference between the current buffer and the
+" file it was loaded from, thus the changes you made.
+" Only define it when not defined already.
+if !exists(":DiffOrig")
+  command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
+               \ | wincmd p | diffthis
+endif
+
+" settings for debian-pkg
+let g:debianfullname = "Sören König"
+let g:debianemail = "soeren.koenig@zalando.de"
+
+" Settings for vimwiki
+let g:vimwiki_folding = 1
+let g:vimwiki_fold_lists = 1
+let g:vimwiki_camel_case = 0
+let g:vimwiki_list = [{'path': '~/wiki/',           'ext': '.txt', 'path_html': '~/wiki/export/',           'diary_rel_path': 'date/',  'diary_index': 'Date', 'diary_header': 'Index', 'maxhi': 0}, 
+                    \ {'path': '~/arbeit/zalando/', 'ext': '.txt', 'path_html': '~/arbeit/zalando/export/', 'diary_rel_path': 'date/',  'diary_index': 'Date', 'diary_header': 'Index', 'maxhi': 0}]
+
+:hi VimwikiHeader1 guifg=#D700AF gui=bold ctermfg=163   term=bold cterm=bold
+:hi VimwikiHeader2 guifg=#8700FF gui=bold ctermfg=93    term=bold cterm=bold
+:hi VimwikiHeader3 guifg=#5F87FF gui=bold ctermfg=69    term=bold cterm=bold
+:hi VimwikiHeader4 guifg=#87AFFF gui=bold ctermfg=111   term=bold cterm=bold
+:hi VimwikiHeader5 guifg=#87AFFF gui=bold ctermfg=111   term=bold cterm=bold
+:hi VimwikiHeader6 guifg=#87AFFF gui=bold ctermfg=111   term=bold cterm=bold
+
+" some convenience functions
+iab <expr> logtst strftime("%T")
+
+function! InsertPythonHeader()
+    exec "normal! ggi#!/usr/bin/env python\<CR># -*- coding: utf-8 -*-\<CR>" 
+endfunction
+iab pyhead <ESC>:call InsertPythonHeader()<CR>i
+
+function! InsertPythonTemplate()
+    r ~/workspace/scripts/python/python_template.py
+endfunction
+iab pytemplate <ESC>:call InsertPythonTemplate()<CR>i
+
+set encoding=utf-8
+set scrolloff=3
+set autoindent
+set showmode
+set wildmenu
+set wildmode=list:longest
+set ttyfast
+set relativenumber
+set undofile
+let mapleader = ","
+
+
+call pathogen#runtime_append_all_bundles()
+call pathogen#helptags()
+
