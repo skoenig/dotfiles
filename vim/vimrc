@@ -15,39 +15,26 @@ else
   colorscheme torte
 endif
 
-" enable mouse in all modes
-"set mouse=a
+"set mouse=a          " enable mouse in all modes
 
-
-
-" Activate auto filetype detection
 syntax on             " Enable syntax highlighting
 filetype on           " Enable filetype detection
 filetype indent on    " Enable filetype-specific indenting
 filetype plugin on    " Enable filetype-specific plugins
 
 set encoding=utf-8    " set encoding to unicode
-"set textwidth=220     " text is displayed 120 chars a line 
 set nowrap            " don't show long lines wrapped
-set autoindent        " Enable automatic indenting for files with ft set
-
-set history=100       " keep 100 lines of command line history
-set backspace=indent,eol,start " allow backspacing over everything in insert mode
-set incsearch         " do incremental searching
 set hlsearch          " highlight matched search patterns
-set showmatch         " Jump to matching bracket
 set ignorecase        " No case in searches (has to be set for option 'smartcase')
 set smartcase         " No case in searches, unless the query contains upper case characters
 set hidden            " Let us move between buffers without writing them.  Don't :q! or :qa! frivolously!
-set laststatus=2      " Always show filename (2 is always)
 set number            " show line numbers
-set ruler             " show the cursor position all the time
-set showcmd           " Show command in statusline as it's being typed
+set relativenumber    " use line numbers relative to the current line
 set cursorline        " highlight current line
-
-set writebackup
-set backupdir=$HOME/.vimbackup/
-
+set showmode          " show Insert, Replace or Visual mode in the last line
+set ttyfast           " fast scrolling
+let mapleader = ","   " use easy to type localleader instead of '\'
+set writebackup       " keep backups of changed files
 set tabstop=4         " spaces to set tabwidth to
 set softtabstop=4     " spaces Vim sees as a tab
 set shiftwidth=4      " amout of spaces < and > uses
@@ -57,8 +44,8 @@ set foldmethod=marker   " automatically fold by marker {{{ }}}
 set foldenable          " all folds closed by default
 
 " Switch buffers
-map <C-Right> :bn<CR>
-map <C-Left>  :bp<CR>
+map <C-Right> :bnext<CR>
+map <C-Left>  :bprev<CR>
 
 " Shift lines up and down in (n)ormal, (i)nsert and (v)isual modi
 nnoremap <C-j> mz:m+<CR>`z
@@ -113,18 +100,6 @@ function! InsertPythonTemplate()
     r ~/workspace/scripts/python/python_template.py
 endfunction
 iab pytemplate <ESC>:call InsertPythonTemplate()<CR>i
-
-set encoding=utf-8
-set scrolloff=3
-set autoindent
-set showmode
-set wildmenu
-set wildmode=list:longest
-set ttyfast
-set relativenumber
-set undofile
-let mapleader = ","
-
 
 call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
