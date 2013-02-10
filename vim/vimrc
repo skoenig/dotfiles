@@ -7,21 +7,29 @@ endif
 " This must be first, because it changes other options as a side effect.
 set nocompatible
 
-" set color scheme
-if $DISPLAY != '' || $TERM == 'xterm' || $TERM == 'xterm-color' || $TERM == 'screen'
-  set t_Co=256 " use 256 colors
-  colorscheme molokai
-else
-  colorscheme torte
-endif
+call pathogen#infect()
 
-"set mouse=a          " enable mouse in all modes
+"call pathogen#runtime_append_all_bundles()
+"call pathogen#helptags()
+
+" set color scheme
+"if $DISPLAY != '' || $TERM == 'xterm' || $TERM == 'xterm-color' || $TERM == 'screen'
+  set t_Co=256 " use 256 colors
+  let g:solarized_termcolors=256
+  colorscheme solarized
+"  colorscheme darkspectrum256
+"
+"else
+"  colorscheme torte
+"endif
 
 syntax on             " Enable syntax highlighting
 filetype on           " Enable filetype detection
 filetype indent on    " Enable filetype-specific indenting
 filetype plugin on    " Enable filetype-specific plugins
 
+let mapleader = ","   " use easy to type localleader instead of '\'
+set mouse=a           " enable mouse in all modes
 set encoding=utf-8    " set encoding to unicode
 set nowrap            " don't show long lines wrapped
 set hlsearch          " highlight matched search patterns
@@ -33,13 +41,12 @@ set relativenumber    " use line numbers relative to the current line
 set cursorline        " highlight current line
 set showmode          " show Insert, Replace or Visual mode in the last line
 set ttyfast           " fast scrolling
-let mapleader = ","   " use easy to type localleader instead of '\'
-set writebackup       " keep backups of changed files
+set writebackup       " make a backup before changing a file
+set backup            " keep backup files
 set tabstop=4         " spaces to set tabwidth to
 set softtabstop=4     " spaces Vim sees as a tab
 set shiftwidth=4      " amout of spaces < and > uses
 set expandtab         " convert tabs to spaces
-
 set foldmethod=marker   " automatically fold by marker {{{ }}}
 set foldenable          " all folds closed by default
 
@@ -55,13 +62,6 @@ inoremap <C-k> <Esc>:m-2<CR>gi
 vnoremap <C-j> :m'>+<CR>gv=`<my`>mzgv`yo`z
 vnoremap <C-k> :m'<-2<CR>gv=`>my`<mzgv`yo`z
 
-" Don't use Ex mode, use Q for formatting
-map Q gq
-
-" CTRL-U in insert mode deletes a lot. Use CTRL-G u to first break undo,
-" so that you can undo CTRL-U after inserting a line break.
-inoremap <C-U> <C-G>u<C-U>
-
 " Convenient command to see the difference between the current buffer and the
 " file it was loaded from, thus the changes you made.
 " Only define it when not defined already.
@@ -74,12 +74,15 @@ endif
 let g:debianfullname = "Sören König"
 let g:debianemail = "soeren.koenig@zalando.de"
 
-" Settings for vimwiki
+" todo.sh
+au BufNewFile,BufRead *.todo set filetype=todo
+
+" settings for vimwiki
 let g:vimwiki_folding = 1
 let g:vimwiki_fold_lists = 1
 let g:vimwiki_camel_case = 0
 let g:vimwiki_list = [{'path': '~/wiki/',           'ext': '.txt', 'path_html': '~/wiki/export/',           'diary_rel_path': 'date/',  'diary_index': 'Date', 'diary_header': 'Index', 'maxhi': 0}, 
-                    \ {'path': '~/arbeit/zalando/', 'ext': '.txt', 'path_html': '~/arbeit/zalando/export/', 'diary_rel_path': 'date/',  'diary_index': 'Date', 'diary_header': 'Index', 'maxhi': 0}]
+                    \ {'path': '~/workspace/sysop-private/zwiki', 'ext': '.txt', 'path_html': '~/workspace/sysop-private/zwiki/export', 'diary_rel_path': 'date/',  'diary_index': 'Date', 'diary_header': 'Index', 'maxhi': 0}]
 
 :hi VimwikiHeader1 guifg=#D700AF gui=bold ctermfg=163   term=bold cterm=bold
 :hi VimwikiHeader2 guifg=#8700FF gui=bold ctermfg=93    term=bold cterm=bold
@@ -88,9 +91,26 @@ let g:vimwiki_list = [{'path': '~/wiki/',           'ext': '.txt', 'path_html': 
 :hi VimwikiHeader5 guifg=#87AFFF gui=bold ctermfg=111   term=bold cterm=bold
 :hi VimwikiHeader6 guifg=#87AFFF gui=bold ctermfg=111   term=bold cterm=bold
 
-" some convenience functions
-iab <expr> logtst strftime("%T")
+" Function to insert a header in the vimwiki style
+ function! InsertWikiHeader()
+    let date = strftime('%A, %d. %B %Y', localtime())
+    let title = substitute(join(split(expand("%:t:r"),"-")), "\\<.",  "\\u&", "g")
+    exec "normal! ggi="title"=\<CR>created"date"\<CR>"
+ endfunction
 
+" Abbreviation, wich calls the above function
+iab wikihead <ESC> :call InsertWikiHeader()<CR>I
+
+" Key mapping for calling the same function
+map <unique> <script> <C-T><C-Z> :call InsertWikiHeader()<CR>
+
+" NERDTree
+map <unique> <Leader>n :NERDTreeToggle<CR>
+
+" ACK
+map <unique> <leader>a <Esc>:Ack!
+
+" python snippets
 function! InsertPythonHeader()
     exec "normal! ggi#!/usr/bin/env python\<CR># -*- coding: utf-8 -*-\<CR>" 
 endfunction
@@ -100,7 +120,4 @@ function! InsertPythonTemplate()
     r ~/workspace/scripts/python/python_template.py
 endfunction
 iab pytemplate <ESC>:call InsertPythonTemplate()<CR>i
-
-call pathogen#runtime_append_all_bundles()
-call pathogen#helptags()
 
