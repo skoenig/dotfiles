@@ -29,7 +29,7 @@ filetype indent on    " Enable filetype-specific indenting
 filetype plugin on    " Enable filetype-specific plugins
 
 let mapleader = ","   " use easy to type localleader instead of '\'
-set mouse=a           " enable mouse in all modes
+set mouse=vn          " enable mouse only in (v)isual and (n)ormal modes
 set encoding=utf-8    " set encoding to unicode
 set nowrap            " don't show long lines wrapped
 set hlsearch          " highlight matched search patterns
@@ -81,8 +81,8 @@ au BufNewFile,BufRead *.todo set filetype=todo
 let g:vimwiki_folding = 1
 let g:vimwiki_fold_lists = 1
 let g:vimwiki_camel_case = 0
-let g:vimwiki_list = [{'path': '~/wiki/',           'ext': '.txt', 'path_html': '~/wiki/export/',           'diary_rel_path': 'date/',  'diary_index': 'Date', 'diary_header': 'Index', 'maxhi': 0}, 
-                    \ {'path': '~/workspace/sysop-private/zwiki', 'ext': '.txt', 'path_html': '~/workspace/sysop-private/zwiki/export', 'diary_rel_path': 'date/',  'diary_index': 'Date', 'diary_header': 'Index', 'maxhi': 0}]
+let g:vimwiki_list = [{'path': '~/wiki/',                         'path_html': '~/wiki/export/',                         'diary_rel_path': 'date/',  'diary_index': 'Date', 'diary_header': 'Index', 'maxhi': 0}, 
+                    \ {'path': '~/workspace/sysop-private/zwiki', 'path_html': '~/workspace/sysop-private/zwiki/export', 'diary_rel_path': 'date/',  'diary_index': 'Date', 'diary_header': 'Index', 'maxhi': 0}]
 
 :hi VimwikiHeader1 guifg=#D700AF gui=bold ctermfg=163   term=bold cterm=bold
 :hi VimwikiHeader2 guifg=#8700FF gui=bold ctermfg=93    term=bold cterm=bold
