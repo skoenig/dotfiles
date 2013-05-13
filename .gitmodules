@@ -1,42 +1,33 @@
 [submodule "bundle/nerdtree"]
-	path = bundle/nerdtree
-	url = https://github.com/scrooloose/nerdtree.git
+    path = bundle/nerdtree
+    url = https://github.com/scrooloose/nerdtree.git
 [submodule "bundle/fugitive"]
-	path = bundle/fugitive
-	url = git://github.com/tpope/vim-fugitive.git
+    path = bundle/fugitive
+    url = git://github.com/tpope/vim-fugitive.git
 [submodule "bundle/gnupg"]
-	path = bundle/gnupg
-	url = git://gitorious.org/vim-gnupg/vim-gnupg.git
-[submodule "bundle/vimwiki"]
-	path = bundle/vimwiki
-	url = https://github.com/weierophinney/vimwiki.git
+    path = bundle/gnupg
+    url = git://gitorious.org/vim-gnupg/vim-gnupg.git
 [submodule "bundle/buftabs"]
-	path = bundle/buftabs
-	url = https://github.com/vim-scripts/buftabs.git
+    path = bundle/buftabs
+    url = https://github.com/vim-scripts/buftabs.git
 [submodule "bundle/sensible"]
-	path = bundle/sensible
-	url = https://github.com/tpope/vim-sensible.git
+    path = bundle/sensible
+    url = https://github.com/tpope/vim-sensible.git
 [submodule "bundle/command-t"]
-	path = bundle/command-t
-	url = git://git.wincent.com/command-t.git
-[submodule "bundle/solarized"]
-	path = bundle/solarized
-	url = git://github.com/altercation/vim-colors-solarized.git
-[submodule "bundle/ropevim"]
-	path = bundle/ropevim
-	url = https://github.com/sontek/rope-vim.git
+    path = bundle/command-t
+    url = git://git.wincent.com/command-t.git
 [submodule "bundle/snipmate"]
-	path = bundle/snipmate
-	url = https://github.com/msanders/snipmate.vim.git
+    path = bundle/snipmate
+    url = https://github.com/msanders/snipmate.vim.git
 [submodule "bundle/ack"]
-	path = bundle/ack
+    path = bundle/ack
     url = https://github.com/mileszs/ack.vim.git
 [submodule "bundle/syntastic"]
-	path = bundle/syntastic
-	url = https://github.com/scrooloose/syntastic.git
+    path = bundle/syntastic
+    url = https://github.com/scrooloose/syntastic.git
 [submodule "bundle/pydoc"]
-	path = bundle/pydoc
-	url = https://github.com/fs111/pydoc.vim.git
-[submodule "bundle/taskpaper"]
-	path = bundle/taskpaper
-	url = git://github.com/davidoc/taskpaper.vim.git
+    path = bundle/pydoc
+    url = https://github.com/fs111/pydoc.vim.git
+[submodule "bundle/todo.txt"]
+    path = bundle/todo.txt
+    url = git://github.com/freitass/todo.txt-vim.git
