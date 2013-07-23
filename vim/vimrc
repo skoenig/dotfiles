@@ -1,27 +1,34 @@
-" When started as "evim", evim.vim will already have done these settings.
-if v:progname =~? "evim"
-  finish
-endif
-
 " Use Vim settings, rather then Vi settings (much better!).
 " This must be first, because it changes other options as a side effect.
 set nocompatible
 
 call pathogen#infect()
 
-"call pathogen#runtime_append_all_bundles()
-"call pathogen#helptags()
+" automatic reloading of .vimrc
+autocmd! bufwritepost .vimrc source %
 
 " set color scheme
-"if $DISPLAY != '' || $TERM == 'xterm' || $TERM == 'xterm-color' || $TERM == 'screen'
+if $DISPLAY != '' || $TERM == 'xterm-256color' || $TERM == 'xterm-color' || $TERM == 'xterm' || $TERM == 'rxvt' || $TERM == 'screen'
   set t_Co=256 " use 256 colors
-  let g:solarized_termcolors=256
-  colorscheme solarized
-"  colorscheme darkspectrum256
-"
-"else
-"  colorscheme torte
-"endif
+  colorscheme Tomorrow-Night-Eighties " Tomorrow 
+else
+  colorscheme delek " morning 
+endif
+
+" set guifont
+if has("gui_running")
+  if has("gui_gtk2")
+    set guifont=Monospace\ 8
+  elseif has("gui_photon")
+    set guifont=Monospace:s8
+  elseif has("gui_kde")
+    set guifont=Monospace/8/-1/5/50/0/0/0/1/0
+  elseif has("x11")
+    set guifont=-*-monospace-medium-r-normal-*-*-180-*-*-m-*-*
+  else
+    set guifont=Monospace:h8:cDEFAULT
+  endif
+endif
 
 syntax on             " Enable syntax highlighting
 filetype on           " Enable filetype detection
@@ -35,20 +42,23 @@ set nowrap            " don't show long lines wrapped
 set hlsearch          " highlight matched search patterns
 set ignorecase        " No case in searches (has to be set for option 'smartcase')
 set smartcase         " No case in searches, unless the query contains upper case characters
-set hidden            " Let us move between buffers without writing them.  Don't :q! or :qa! frivolously!
+set hidden            " Let us move between buffers without writing them. Don't :q! or :qa! frivolously!
 set number            " show line numbers
-set relativenumber    " use line numbers relative to the current line
 set cursorline        " highlight current line
 set showmode          " show Insert, Replace or Visual mode in the last line
 set ttyfast           " fast scrolling
 set writebackup       " make a backup before changing a file
 set backup            " keep backup files
 set tabstop=4         " spaces to set tabwidth to
-set softtabstop=4     " spaces Vim sees as a tab
+"set softtabstop=4     " spaces Vim sees as a tab
 set shiftwidth=4      " amout of spaces < and > uses
 set expandtab         " convert tabs to spaces
 set foldmethod=marker   " automatically fold by marker {{{ }}}
 set foldenable          " all folds closed by default
+set textwidth=120       " textwidth used by used for wrapping
+set formatoptions+=t    " automatic wrapping
+set pastetoggle=<F2>    " copy & paste
+execute "set colorcolumn=" . join(range(121,335), ',') 
 
 " Switch buffers
 map <C-Right> :bnext<CR>
@@ -70,19 +80,31 @@ if !exists(":DiffOrig")
                \ | wincmd p | diffthis
 endif
 
-" settings for debian-pkg
-let g:debianfullname = "Sören König"
-let g:debianemail = "soeren.koenig@zalando.de"
+" NERDTree
+map <unique> <leader>n :NERDTreeToggle<CR>
 
-" todo.sh
-au BufNewFile,BufRead *.todo set filetype=todo
+" ACK
+map <unique> <leader>a <Esc>:Ack!
+
+" ctrl-p
+let g:ctrlp_map = '<leader>t'
+let g:ctrlp_working_path_mode = 0
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc,*~"
+let g:ctrlp_custom_ignore = {
+    \ 'dir': '\.git$\|\.hg$\|\.svn$\|node_modules',
+    \ 'file': '\.pyc$\|\.pyo$\|\.rbc$|\.rbo$\|\.class$\|\.o$\|\~$\|\.DS_Store',
+    \ 'link': 'some_bad_symbolic_links',
+    \ }
+
+" jedi
+let g:jedi#use_tabs_not_buffers = 0
 
 " settings for vimwiki
 let g:vimwiki_folding = 1
 let g:vimwiki_fold_lists = 1
 let g:vimwiki_camel_case = 0
-let g:vimwiki_list = [{'path': '~/wiki/',                         'path_html': '~/wiki/export/',                         'diary_rel_path': 'date/',  'diary_index': 'Date', 'diary_header': 'Index', 'maxhi': 0}, 
-                    \ {'path': '~/workspace/sysop-private/zwiki', 'path_html': '~/workspace/sysop-private/zwiki/export', 'diary_rel_path': 'date/',  'diary_index': 'Date', 'diary_header': 'Index', 'maxhi': 0}]
+let g:vimwiki_list = [{'path': '~/wiki/',                         'path_html': '~/wiki/export/',                         'diary_rel_path': 'date/',  'diary_index': 'Date', 'diary_header': 'Index', 'maxhi': 0, 'syntax': 'markdown', 'ext': '.md'}, 
+                    \ {'path': '~/workspace/sysop-private/zwiki', 'path_html': '~/workspace/sysop-private/zwiki/export', 'diary_rel_path': 'date/',  'diary_index': 'Date', 'diary_header': 'Index', 'maxhi': 0, 'syntax': 'markdown', 'ext': '.md'}]
 
 :hi VimwikiHeader1 guifg=#D700AF gui=bold ctermfg=163   term=bold cterm=bold
 :hi VimwikiHeader2 guifg=#8700FF gui=bold ctermfg=93    term=bold cterm=bold
@@ -95,29 +117,34 @@ let g:vimwiki_list = [{'path': '~/wiki/',                         'path_html': '
  function! InsertWikiHeader()
     let date = strftime('%A, %d. %B %Y', localtime())
     let title = substitute(join(split(expand("%:t:r"),"-")), "\\<.",  "\\u&", "g")
-    exec "normal! ggi="title"=\<CR>created"date"\<CR>"
+    let underline = substitute(title, ".", "=", "g")
+    exec "normal! I".title
+    put=underline
+    put='created '.date
+    exec "normal! o\<CR>"
  endfunction
 
 " Abbreviation, wich calls the above function
-iab wikihead <ESC> :call InsertWikiHeader()<CR>I
+iab vimwiki <ESC>:call InsertWikiHeader()<CR>
 
 " Key mapping for calling the same function
 map <unique> <script> <C-T><C-Z> :call InsertWikiHeader()<CR>
 
-" NERDTree
-map <unique> <Leader>n :NERDTreeToggle<CR>
-
-" ACK
-map <unique> <leader>a <Esc>:Ack!
-
 " python snippets
 function! InsertPythonHeader()
-    exec "normal! ggi#!/usr/bin/env python\<CR># -*- coding: utf-8 -*-\<CR>" 
+    exec "normal! ggO#!/usr/bin/env python\<CR># -*- coding: utf-8 -*-\<CR>"
 endfunction
-iab pyhead <ESC>:call InsertPythonHeader()<CR>i
+iab pyhead <ESC>:call InsertPythonHeader()<CR>
 
 function! InsertPythonTemplate()
+    exec "normal! ggO"
     r ~/workspace/scripts/python/python_template.py
 endfunction
-iab pytemplate <ESC>:call InsertPythonTemplate()<CR>i
+iab pytemplate <ESC>:call InsertPythonTemplate()<CR>
+
+" filetype detection
+au BufNewFile,BufRead *.markdown,*.mdown,*.mkd,*.mkdn,*.md set ft=markdown  
+au BufNewFile,BufRead *.jinja set ft=jinja
+au BufNewFile,BufRead todo.txt,done.txt set filetype=todo
+
 
