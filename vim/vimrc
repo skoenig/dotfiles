@@ -10,9 +10,9 @@ autocmd! bufwritepost .vimrc source %
 " set color scheme
 if $DISPLAY != '' || $TERM == 'xterm-256color' || $TERM == 'xterm-color' || $TERM == 'xterm' || $TERM == 'rxvt' || $TERM == 'screen'
   set t_Co=256 " use 256 colors
-  colorscheme Tomorrow-Night-Eighties " Tomorrow 
+  colorscheme Tomorrow-Night-Eighties " Tomorrow
 else
-  colorscheme delek " morning 
+  colorscheme delek " morning
 endif
 
 " set guifont
@@ -58,7 +58,7 @@ set foldenable          " all folds closed by default
 set textwidth=120       " textwidth used by used for wrapping
 set formatoptions+=t    " automatic wrapping
 set pastetoggle=<F2>    " copy & paste
-execute "set colorcolumn=" . join(range(121,335), ',') 
+execute "set colorcolumn=" . join(range(121,335), ',')
 
 " Switch buffers
 map <C-Right> :bnext<CR>
@@ -103,7 +103,7 @@ let g:jedi#use_tabs_not_buffers = 0
 let g:vimwiki_folding = 1
 let g:vimwiki_fold_lists = 1
 let g:vimwiki_camel_case = 0
-let g:vimwiki_list = [{'path': '~/wiki/',                         'path_html': '~/wiki/export/',                         'diary_rel_path': 'date/',  'diary_index': 'Date', 'diary_header': 'Index', 'maxhi': 0, 'syntax': 'markdown', 'ext': '.md'}, 
+let g:vimwiki_list = [{'path': '~/wiki/',                         'path_html': '~/wiki/export/',                         'diary_rel_path': 'date/',  'diary_index': 'Date', 'diary_header': 'Index', 'maxhi': 0, 'syntax': 'markdown', 'ext': '.md'},
                     \ {'path': '~/workspace/sysop-private/zwiki', 'path_html': '~/workspace/sysop-private/zwiki/export', 'diary_rel_path': 'date/',  'diary_index': 'Date', 'diary_header': 'Index', 'maxhi': 0, 'syntax': 'markdown', 'ext': '.md'}]
 
 :hi VimwikiHeader1 guifg=#D700AF gui=bold ctermfg=163   term=bold cterm=bold
@@ -118,17 +118,33 @@ let g:vimwiki_list = [{'path': '~/wiki/',                         'path_html': '
     let date = strftime('%A, %d. %B %Y', localtime())
     let title = substitute(join(split(expand("%:t:r"),"-")), "\\<.",  "\\u&", "g")
     let underline = substitute(title, ".", "=", "g")
-    exec "normal! I".title
+    exec "normal! I".'title: '.title
+    put='summary: '
+    put='tags: '
+    put='created: '.date
+    put='updated: '.date
+    put
+    put=title
     put=underline
-    put='created '.date
     exec "normal! o\<CR>"
  endfunction
 
 " Abbreviation, wich calls the above function
 iab vimwiki <ESC>:call InsertWikiHeader()<CR>
 
-" Key mapping for calling the same function
-map <unique> <script> <C-T><C-Z> :call InsertWikiHeader()<CR>
+" If buffer modified, update any 'updated: ' in the first 10 lines.
+" Restores cursor and window position using save_cursor variable.
+function! LastModified()
+  if &modified
+    let save_cursor = getpos(".")
+    let n = min([10, line("$")])
+    keepjumps exe '1,' . n . 's#^\(updated:\).*#\1 ' .
+          \ strftime('%A, %d. %B %Y', localtime()) . '#e'
+    call histdel('search', -1)
+    call setpos('.', save_cursor)
+  endif
+endfun
+autocmd BufWritePre * call LastModified()
 
 " python snippets
 function! InsertPythonHeader()
@@ -143,7 +159,7 @@ endfunction
 iab pytemplate <ESC>:call InsertPythonTemplate()<CR>
 
 " filetype detection
-au BufNewFile,BufRead *.markdown,*.mdown,*.mkd,*.mkdn,*.md set ft=markdown  
+au BufNewFile,BufRead *.markdown,*.mdown,*.mkd,*.mkdn,*.md set ft=markdown
 au BufNewFile,BufRead *.jinja set ft=jinja
 au BufNewFile,BufRead todo.txt,done.txt set filetype=todo
 
