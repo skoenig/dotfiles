@@ -118,27 +118,22 @@ let g:vimwiki_list = [{'path': '~/wiki/',                         'path_html': '
     let date = strftime('%A, %d. %B %Y', localtime())
     let title = substitute(join(split(expand("%:t:r"),"-")), "\\<.",  "\\u&", "g")
     let underline = substitute(title, ".", "=", "g")
-    exec "normal! I".'title: '.title
-    put='summary: '
-    put='tags: '
-    put='created: '.date
-    put='updated: '.date
-    put
-    put=title
+    exec "normal! I".title
     put=underline
+    put='*created ' . date . ' - updated ' . date . '*'
     exec "normal! o\<CR>"
  endfunction
 
 " Abbreviation, wich calls the above function
 iab vimwiki <ESC>:call InsertWikiHeader()<CR>
 
-" If buffer modified, update any 'updated: ' in the first 10 lines.
+" If buffer modified, update any 'updated' in the first 3 lines.
 " Restores cursor and window position using save_cursor variable.
 function! LastModified()
   if &modified
     let save_cursor = getpos(".")
-    let n = min([10, line("$")])
-    keepjumps exe '1,' . n . 's#^\(updated:\).*#\1 ' .
+    let n = min([3, line("$")])
+    keepjumps exe '1,' . n . 's#^\(.*updated\)[^*]*#\1 ' .
           \ strftime('%A, %d. %B %Y', localtime()) . '#e'
     call histdel('search', -1)
     call setpos('.', save_cursor)
