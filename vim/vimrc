@@ -8,11 +8,12 @@ call pathogen#infect()
 autocmd! bufwritepost .vimrc source %
 
 " set color scheme
-if $DISPLAY != '' || $TERM == 'xterm-256color' || $TERM == 'xterm-color' || $TERM == 'xterm' || $TERM == 'rxvt' || $TERM == 'screen'
-  set t_Co=256 " use 256 colors
-  colorscheme Tomorrow-Night-Eighties " Tomorrow
-else
-  colorscheme delek " morning
+colorscheme lucius
+
+set t_Co=256
+" Allow color schemes to do bright colors without forcing bold.
+if &t_Co == 8 && $TERM !~# '^linux'
+  set t_Co=16
 endif
 
 " set guifont
