@@ -7,9 +7,29 @@ require("awful.rules")
 require("beautiful")
 -- Notification library
 require("naughty")
-
 -- Load Debian menu entries
 require("debian.menu")
+-- widgets
+require("vicious")
+
+-- {{{ Widgets
+-- Initialize widgets
+memwidget = widget({ type = "textbox" })
+cpuwidget = widget({ type = "textbox" })
+mpdwidget = widget({ type = "textbox" })
+-- Register widgets
+vicious.register(memwidget, vicious.widgets.mem, "$1% ($2MB/$3MB)", 13)
+vicious.register(cpuwidget, vicious.widgets.cpu, "$1%")
+vicious.register(mpdwidget, vicious.widgets.mpd,
+    function (widget, args)
+        if args["{state}"] == "Stop" then
+            return " - "
+        else
+            return args["{Artist}"]..' - '.. args["{Title}"]
+        end
+    end, 10)
+
+-- }}}
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -331,6 +351,9 @@ for s = 1, screen.count() do
         mylayoutbox[s],
         mytextclock,
         s == 1 and mysystray or nil,
+        memwidget,
+        cpuwidget,
+        mpdwidget,
         mytasklist[s],
         layout = awful.widget.layout.horizontal.rightleft
     }
