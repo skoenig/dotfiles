@@ -1,5 +1,7 @@
-## GNOME PolicyKit and Keyring
-eval $(gnome-keyring-daemon -s --components=pkcs11,secrets,ssh,gpg) &
+#!/bin/bash
+
+# mimic a non-reparenting window manager for Java applications
+wmname LG3D
 
 ## Set root window colour
 #hsetroot -solid "#333333" &
@@ -20,19 +22,14 @@ fi
 ## Start screensaver
 gnome-screensaver &
 
-## Set keyboard settings - 250 ms delay and 25 cps (characters per second) repeat rate.
-## Adjust the values according to your preferances.
-xset r rate 250 25 &
-
-## Turn on/off system beep
-xset b off &
-
-## have default mouse cursor theme at least in root window
-xsetroot -cursor_name left_ptr &
-
 nm-applet &
 pidgin &
 ~/.dropbox-dist/dropboxd &
 
 cd ~
+
+## GNOME PolicyKit and Keyring
+eval $(gnome-keyring-daemon --start --components=pkcs11,secrets,ssh,gpg)
+export GNOME_KEYRING_CONTROL GNOME_KEYRING_PID GPG_AGENT_INFO SSH_AUTH_SOCK
+
 exec awesome >> ~/.cache/awesome/stdout 2>> ~/.cache/awesome/stderr
