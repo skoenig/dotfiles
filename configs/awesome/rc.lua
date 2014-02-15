@@ -269,7 +269,7 @@ theme.border_focus  = lightsalmon
 tags = {}
 for s = 1, screen.count() do
     -- Each screen has its own tag table.
-    tags[s] = awful.tag({ 1, 2, 3, 4, 5, 6, 7, 8, "mpd" }, s, layouts[1])
+    tags[s] = awful.tag({ 1, 2, 3, 4, 5, 6, 7, 8, 9 }, s, layouts[1])
 end
 -- }}}
 
@@ -418,7 +418,7 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, "Tab", function () awful.client.focus.history.previous() if client.focus then client.focus:raise() end end),
 
     -- Standard program
-    awful.key({ modkey,           }, "t", function () awful.util.spawn(terminal) end),
+    awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
     awful.key({ modkey, "Control" }, "r", awesome.restart),
     awful.key({ modkey, "Control" }, "q", awesome.quit),
 
@@ -443,7 +443,7 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Shift"   }, "Delete", function () awful.util.spawn("gnome-screensaver-command --lock") end),
 
     -- Prompt
-    awful.key({ modkey            }, "p",     function () mypromptbox[mouse.screen]:run() end)
+    awful.key({ modkey            }, "r",     function () mypromptbox[mouse.screen]:run() end)
 
 --    awful.key({ modkey            }, "x",
 --              function ()
@@ -455,25 +455,24 @@ globalkeys = awful.util.table.join(
 )
 
 clientkeys = awful.util.table.join(
-    awful.key({ modkey,           }, "m",      function (c) c.fullscreen = not c.fullscreen  end),
+    awful.key({ modkey,           }, "f",      function (c) c.fullscreen = not c.fullscreen  end),
     awful.key({ modkey,           }, "x",      function (c) c:kill()                         end),
-    awful.key({ modkey,           }, "f",      awful.client.floating.toggle                     ),
---    awful.key({ modkey,           }, "f",      function (c) awful.client.floating.toggle() c.ontop = true end),
-    awful.key({ modkey,           }, "Return", function (c) c:swap(awful.client.getmaster()) end),
+    awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle                     ),
+    awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end),
     awful.key({ modkey,           }, "o",      awful.client.movetoscreen                        ),
     awful.key({ modkey, "Shift"   }, "r",      function (c) c:redraw()                       end),
---    awful.key({ modkey,         }, "t",      function (c) c.ontop = not c.ontop            end),
+    awful.key({ modkey,           }, "t",      function (c) c.ontop = not c.ontop            end),
     awful.key({ modkey,           }, "n",
         function (c)
             -- The client currently has the input focus, so it cannot be
             -- minimized, since minimized clients can't have the focus.
             c.minimized = true
+        end),
+    awful.key({ modkey,           }, "m",
+        function (c)
+            c.maximized_horizontal = not c.maximized_horizontal
+            c.maximized_vertical   = not c.maximized_vertical
         end)
---    awful.key({ modkey,           }, "m",
---        function (c)
---            c.maximized_horizontal = not c.maximized_horizontal
---            c.maximized_vertical   = not c.maximized_vertical
---        end)
 )
 
 -- Compute the maximum number of digit we need, limited to 9
