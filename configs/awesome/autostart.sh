@@ -19,10 +19,11 @@ if egrep -iq 'touchpad' /proc/bus/input/devices; then
     synclient TapButton1=1 &
 fi
 
-## Start screensaver
-gnome-screensaver &
+## this may be also needed by nm-applet
+#/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 &
 
-nm-applet &
+## Start daemons
+gnome-screensaver &
 pidgin &
 ~/.dropbox-dist/dropboxd &
 
@@ -32,4 +33,5 @@ cd ~
 eval $(gnome-keyring-daemon --start --components=pkcs11,secrets,ssh,gpg)
 export GNOME_KEYRING_CONTROL GNOME_KEYRING_PID GPG_AGENT_INFO SSH_AUTH_SOCK
 
-exec awesome >> ~/.cache/awesome/stdout 2>> ~/.cache/awesome/stderr
+## ck-launch-session: nm-applet needs this to run w/h root privileges
+exec ck-launch-session awesome >> ~/.cache/awesome/stdout 2>> ~/.cache/awesome/stderr
