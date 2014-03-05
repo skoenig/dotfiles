@@ -14,12 +14,10 @@ require("vicious")
 
 -- {{{ Widgets
 -- Initialize widgets
-memwidget = widget({ type = "textbox" })
-cpuwidget = widget({ type = "textbox" })
+batterywidget = widget({ type = "textbox" })
 mpdwidget = widget({ type = "textbox" })
 -- Register widgets
-vicious.register(memwidget, vicious.widgets.mem, "$1% ($2MB/$3MB)", 13)
-vicious.register(cpuwidget, vicious.widgets.cpu, "$1%")
+vicious.register(batterywidget, vicious.widgets.bat, "$1$2%", 10, "BAT0")
 vicious.register(mpdwidget, vicious.widgets.mpd,
     function (widget, args)
         if args["{state}"] == "Stop" then
@@ -377,8 +375,7 @@ for s = 1, screen.count() do
         mylayoutbox[s],
         mytextclock,
         s == 1 and mysystray or nil,
-        memwidget,
-        cpuwidget,
+        batterywidget,
         mpdwidget,
         mytasklist[s],
         layout = awful.widget.layout.horizontal.rightleft

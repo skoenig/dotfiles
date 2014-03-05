@@ -33,5 +33,5 @@ cd ~
 eval $(gnome-keyring-daemon --start --components=pkcs11,secrets,ssh,gpg)
 export GNOME_KEYRING_CONTROL GNOME_KEYRING_PID GPG_AGENT_INFO SSH_AUTH_SOCK
 
-## ck-launch-session: nm-applet needs this to run w/h root privileges
+## ck-launch-session: nm-applet needs this to run w/h root privileges + installed gksu
 exec ck-launch-session awesome >> ~/.cache/awesome/stdout 2>> ~/.cache/awesome/stderr
