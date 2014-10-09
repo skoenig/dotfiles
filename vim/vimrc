@@ -159,5 +159,6 @@ iab pytemplate <ESC>:call InsertPythonTemplate()<CR>
 au BufNewFile,BufRead *.markdown,*.mdown,*.mkd,*.mkdn,*.md set ft=markdown
 au BufNewFile,BufRead *.jinja set ft=jinja
 au BufNewFile,BufRead todo.txt,done.txt set filetype=todo
+au BufNewFile,BufRead *pp set filetype=puppet
 
 
