@@ -14,9 +14,9 @@ wmname LG3D
 #xfce4-power-manager &
 
 ## Detect and configure touchpad. See 'man synclient' for more info.
-if egrep -iq 'touchpad' /proc/bus/input/devices; then
+if egrep -iq 'synaptics' /proc/bus/input/devices; then
     synclient VertEdgeScroll=1 &
-    synclient TapButton1=1 &
+    synclient TapButton1=0 &
 fi
 
 ## this may be also needed by nm-applet
