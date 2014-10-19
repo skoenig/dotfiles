@@ -1,4 +1,4 @@
--- *created Tuesday, 10. December 2013 - updated Monday, 13. January 2014*
+-- *created Tuesday, 10. December 2013 - updated Friday, 17. October 2014*
 -- Standard awesome library
 require("awful")
 require("awful.autofocus")
@@ -434,8 +434,8 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, "Delete", function () awful.util.spawn("amixer set Master toggle -q") end),
     awful.key({ modkey,           }, "Prior", function () awful.util.spawn("amixer set Master 4%+ -q") end),
     awful.key({ modkey,           }, "Next", function () awful.util.spawn("amixer set Master 4%- -q") end),
-    awful.key({ modkey,           }, "Home", function () awful.util.spawn("mpc prev") end),
-    awful.key({ modkey,           }, "End", function () awful.util.spawn("mpc next") end),
+    awful.key({ modkey,           }, "Home", function () awful.util.spawn("mpc next") end),
+    awful.key({ modkey,           }, "End", function () awful.util.spawn("mpc prev") end),
     awful.key({ modkey,           }, "Insert", function () awful.util.spawn("mpc toggle") end),
     awful.key({ modkey, "Shift"   }, "Delete", function () awful.util.spawn("gnome-screensaver-command --lock") end),
 
