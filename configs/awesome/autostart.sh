@@ -7,24 +7,11 @@ wmname LG3D
 #hsetroot -solid "#333333" &
 #feh --bg-fill ~/graphic/wallpapers/nature/nature_190.png &
 
-## Volume keys daemon
-#xfce4-volumed &
-
-## Enable power management
-#xfce4-power-manager &
-
-## Detect and configure touchpad. See 'man synclient' for more info.
-if egrep -iq 'synaptics' /proc/bus/input/devices; then
-    synclient VertEdgeScroll=1 &
-    synclient TapButton1=0 &
-fi
-
 ## this may be also needed by nm-applet
 #/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 &
 
 ## Start daemons
 gnome-screensaver &
-pidgin &
 ~/.dropbox-dist/dropboxd &
 
 cd ~
