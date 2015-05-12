@@ -1,4 +1,4 @@
--- *created Tuesday, 10. December 2013 - updated Friday, 17. October 2014*
+-- *created Tuesday, 10. December 2013 - updated Monday, 04. May 2015*
 -- Standard awesome library
 require("awful")
 require("awful.autofocus")
@@ -282,7 +282,6 @@ myawesomemenu = {
 }
 
 mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
-                                    { "Debian", debian.menu.Debian_menu.Debian },
                                     { "open terminal", terminal }
                                   }
                         })
