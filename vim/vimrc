@@ -115,6 +115,9 @@ let g:vimwiki_list = [{'path': '~/wiki/',                         'path_html': '
 :hi VimwikiHeader5 guifg=#87AFFF gui=bold ctermfg=111   term=bold cterm=bold
 :hi VimwikiHeader6 guifg=#87AFFF gui=bold ctermfg=111   term=bold cterm=bold
 
+" markdown
+let g:vim_markdown_folding_disabled=1
+
 " Function to insert a header in the vimwiki style
  function! InsertWikiHeader()
     let date = strftime('%A, %d. %B %Y', localtime())
