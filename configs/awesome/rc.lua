@@ -1,4 +1,4 @@
--- *created Tuesday, 10. December 2013 - updated Monday, 04. May 2015*
+-- *created Tuesday, 10. December 2013 - updated Wednesday, 01. July 2015*
 -- Standard awesome library
 require("awful")
 require("awful.autofocus")
@@ -258,8 +258,8 @@ local  white                 = "#ffffff"
 theme.font          = "monospace 8"
 theme.bg_focus      = "#3465A4"
 theme.border_width  = "2"
-theme.border_focus  = lightsalmon
---theme.bg_focus      = springgreen
+theme.border_focus      = lawngreen
+-- theme.border_focus  = lightsalmon
 -- }}}
 
 -- {{{ Tags
