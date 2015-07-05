@@ -2,7 +2,7 @@
 
 current_dir=$(pwd)
 
-sudo apt-get -y install "^libxcb*..*-dev$" feh gnome-keyring gnome-screensaver libx11-xcb-dev libxft-dev libxrandr-dev \
+sudo apt-get -y install "^libxcb*..*-dev$" feh gnome-keyring libx11-xcb-dev libxft-dev libxrandr-dev \
 libxt-dev network-manager-gnome sakura scrot suckless-tools trayer xfce4-power-manager xterm
 
 cd /tmp
