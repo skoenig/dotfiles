@@ -11,6 +11,9 @@ tar xf SPECTRWM_2_7_2.tar.gz
 cd spectrwm-SPECTRWM_2_7_2/linux/ && make
 sudo make install
 
-ln -s $(readlink -e $current_dir) ~/.config/spectrwm
+if [ ! -h ~/.config/spectrwm ]
+then
+    ln -s $(readlink -e $current_dir) ~/.config/spectrwm
+fi
 ln -sf ~/.config/spectrwm/spectrwm.conf ~/.spectrwm.conf
 ln -sf ~/.spectrwm.conf ~/.scrotwm.conf
