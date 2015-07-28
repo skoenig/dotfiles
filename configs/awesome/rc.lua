@@ -1,4 +1,4 @@
--- *created Tuesday, 10. December 2013 - updated Wednesday, 01. July 2015*
+-- *created Tuesday, 10. December 2013 - updated Tuesday, 28. July 2015*
 -- Standard awesome library
 require("awful")
 require("awful.autofocus")
@@ -408,8 +408,8 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Shift"   }, "Left", function () awful.client.swap.byidx( -1)    end),
 
     -- Layout manipulation
-    awful.key({ modkey, "Control" }, "j", function () awful.screen.focus_relative( 1) end),
-    awful.key({ modkey, "Control" }, "k", function () awful.screen.focus_relative(-1) end),
+    awful.key({ modkey, "Control" }, "Left", function () awful.screen.focus_relative( 1) end),
+    awful.key({ modkey, "Control" }, "Right", function () awful.screen.focus_relative(-1) end),
     awful.key({ modkey,           }, "u", awful.client.urgent.jumpto),
     awful.key({ modkey,           }, "Tab", function () awful.client.focus.history.previous() if client.focus then client.focus:raise() end end),
 
@@ -420,15 +420,13 @@ globalkeys = awful.util.table.join(
 
     awful.key({ modkey,           }, "l",     function () awful.tag.incmwfact( 0.05)    end),
     awful.key({ modkey,           }, "h",     function () awful.tag.incmwfact(-0.05)    end),
-    awful.key({ modkey, "Shift"   }, "h",     function () awful.tag.incnmaster( 1)      end),
-    awful.key({ modkey, "Shift"   }, "l",     function () awful.tag.incnmaster(-1)      end),
-    awful.key({ modkey, "Control" }, "h",     function () awful.tag.incncol( 1)         end),
-    awful.key({ modkey, "Control" }, "l",     function () awful.tag.incncol(-1)         end),
+    awful.key({ modkey,           }, ",",     function () awful.tag.incnmaster( 1)      end),
+    awful.key({ modkey,           }, ".",     function () awful.tag.incnmaster(-1)      end),
+    awful.key({ modkey, "Shift"   }, ",",     function () awful.tag.incncol( 1)         end),
+    awful.key({ modkey, "Shift"   }, ".",     function () awful.tag.incncol(-1)         end),
     awful.key({ modkey,           }, "space", function () awful.layout.inc(layouts,  1) end),
     awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(layouts, -1) end),
-
-    awful.key({ modkey, "Control" }, "n", awful.client.restore),
-
+awful.key({ modkey, "Control" }, "n", awful.client.restore),
     -- multimedia keybindings
     awful.key({ modkey,           }, "Delete", function () awful.util.spawn("amixer set Master toggle -q") end),
     awful.key({ modkey,           }, "Prior", function () awful.util.spawn("amixer set Master 4%+ -q") end),
@@ -570,6 +568,7 @@ end)
 client.add_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.add_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
+--
 -- {{{ Misc
 --function run_once(prg,arg_string,pname,screen)
 --    if not prg then
