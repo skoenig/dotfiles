@@ -1,4 +1,4 @@
--- *created Tuesday, 10. December 2013 - updated Tuesday, 28. July 2015*
+-- *created Tuesday, 10. December 2013 - updated Wednesday, 29. July 2015*
 -- Standard awesome library
 require("awful")
 require("awful.autofocus")
@@ -434,7 +434,7 @@ awful.key({ modkey, "Control" }, "n", awful.client.restore),
     awful.key({ modkey,           }, "Home", function () awful.util.spawn("mpc next") end),
     awful.key({ modkey,           }, "End", function () awful.util.spawn("mpc prev") end),
     awful.key({ modkey,           }, "Insert", function () awful.util.spawn("mpc toggle") end),
-    awful.key({ modkey, "Shift"   }, "Delete", function () awful.util.spawn("gnome-screensaver-command --lock") end),
+    awful.key({ modkey, "Shift"   }, "Delete", function () awful.util.spawn("slock") end),
 
     -- Prompt
     awful.key({ modkey            }, "r",     function () mypromptbox[mouse.screen]:run() end)
