@@ -1,20 +1,70 @@
 " Use Vim settings, rather then Vi settings (much better!).
 " This must be first, because it changes other options as a side effect.
-set nocompatible
 
+set nocompatible
 call pathogen#infect()
 
 " automatic reloading of .vimrc
 autocmd! bufwritepost .vimrc source %
 
-" set color scheme
-colorscheme lucius
+" remove trailing whitespaces
+fun! <SID>StripTrailingWhitespaces()
+    let l = line(".")
+    let c = col(".")
+    %s/\s\+$//e
+    call cursor(l, c)
+endfun
+
+if has('autocmd')
+    filetype plugin indent on
+    autocmd BufWritePre *.* :call <SID>StripTrailingWhitespaces()
+endif
+
+" Enable syntax highlighting
+if has('syntax') && !exists('g:syntax_on')
+  syntax enable
+endif
+
+" Use <C-L> to clear the highlighting of :set hlsearch.
+if maparg('<C-L>', 'n') ==# ''
+  nnoremap <silent> <C-L> :nohlsearch<CR><C-L>
+endif
+
+if !&scrolloff
+  set scrolloff=1
+endif
+if !&sidescrolloff
+  set sidescrolloff=5
+endif
+set display+=lastline
+
+if &listchars ==# 'eol:$'
+  set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
+  if &termencoding ==# 'utf-8' || &encoding ==# 'utf-8'
+    let &listchars = "tab:\u21e5 ,trail:\u2423,extends:\u21c9,precedes:\u21c7,nbsp:\u26ad"
+  endif
+endif
+
+if &history < 1000
+  set history=1000
+endif
+set viminfo^=!
+
+if !exists('g:netrw_list_hide')
+  let g:netrw_list_hide = '^\.,\~$,^tags$'
+endif
+
+" Load matchit.vim, but only if the user hasn't installed a newer version.
+if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
+  runtime! macros/matchit.vim
+endif
+
+" Make Y consistent with C and D.  See :help Y.
+nnoremap Y y$
 
 set t_Co=256
-" Allow color schemes to do bright colors without forcing bold.
-if &t_Co == 8 && $TERM !~# '^linux'
-  set t_Co=16
-endif
+set background=dark
+colorscheme lucius
 
 " set guifont
 if has("gui_running")
@@ -31,35 +81,71 @@ if has("gui_running")
   endif
 endif
 
-syntax on             " Enable syntax highlighting
 filetype on           " Enable filetype detection
 filetype indent on    " Enable filetype-specific indenting
 filetype plugin on    " Enable filetype-specific plugins
 
 let mapleader = ","   " use easy to type localleader instead of '\'
-set mouse=vn          " enable mouse only in (v)isual and (n)ormal modes
 set encoding=utf-8    " set encoding to unicode
-set nowrap            " don't show long lines wrapped
+set wrap              " show long lines wrapped
 set hlsearch          " highlight matched search patterns
 set ignorecase        " No case in searches (has to be set for option 'smartcase')
 set smartcase         " No case in searches, unless the query contains upper case characters
 set hidden            " Let us move between buffers without writing them. Don't :q! or :qa! frivolously!
 set number            " show line numbers
 set cursorline        " highlight current line
+set ruler             " show the cursor position all the time
+set showcmd           " display incomplete commands
 set showmode          " show Insert, Replace or Visual mode in the last line
 set ttyfast           " fast scrolling
 set writebackup       " make a backup before changing a file
 set backup            " keep backup files
-set tabstop=4         " spaces to set tabwidth to
-"set softtabstop=4     " spaces Vim sees as a tab
 set shiftwidth=4      " amout of spaces < and > uses
+set softtabstop=4
+set tabstop=4         " spaces to set tabwidth to
 set expandtab         " convert tabs to spaces
-set foldmethod=marker   " automatically fold by marker {{{ }}}
-set foldenable          " all folds closed by default
-set textwidth=120       " textwidth used by used for wrapping
-set formatoptions+=t    " automatic wrapping
-set pastetoggle=<F2>    " copy & paste
-execute "set colorcolumn=" . join(range(121,335), ',')
+set foldmethod=marker " automatically fold by marker {{{ }}}
+set foldenable        " all folds closed by default
+set textwidth=0       " textwidth used by used for wrapping
+set formatoptions+=t  " automatic wrapping
+set autoindent
+set backspace=indent,eol,start
+set complete-=i
+set showmatch
+set smarttab
+set autoread
+set autowrite
+set fileformats+=mac
+set nrformats-=octal
+set shiftround
+set ttimeout
+set ttimeoutlen=50
+set incsearch
+set laststatus=2
+set wildmenu
+set nowrap
+set langmenu=en
+set helplang=en
+set relativenumber
+set novisualbell
+set colorcolumn=80
+set scrolloff=10
+set sidescrolloff=10
+
+" toggle copy & paste mode
+set pastetoggle=<F2>
+
+" toggle line numbers
+nnoremap <F3> :set nonumber!<CR>
+
+" toggle cursorline highlighting
+nnoremap <F4> :set nocursorline!<CR>
+
+" toggle listing whitespace characters
+nnoremap <F5> :set list!<CR>
+
+" toggle line wrapping
+nnoremap <F6> :set wrap!<CR>
 
 " Switch buffers
 map <C-Right> :bnext<CR>
@@ -68,8 +154,8 @@ map <C-Left>  :bprev<CR>
 " Shift lines up and down in (n)ormal, (i)nsert and (v)isual modi
 nnoremap <C-j> mz:m+<CR>`z
 nnoremap <C-k> mz:m-2<CR>`z
-inoremap <C-j> <Esc>:m+<CR>gi
-inoremap <C-k> <Esc>:m-2<CR>gi
+"inoremap <C-j> <Esc>:m+<CR>gi
+"inoremap <C-k> <Esc>:m-2<CR>gi
 vnoremap <C-j> :m'>+<CR>gv=`<my`>mzgv`yo`z
 vnoremap <C-k> :m'<-2<CR>gv=`>my`<mzgv`yo`z
 
@@ -81,11 +167,37 @@ if !exists(":DiffOrig")
                \ | wincmd p | diffthis
 endif
 
+" color tweaks
+hi User1 term=inverse,bold cterm=bold ctermbg=darkgreen ctermfg=white
+hi User2 term=inverse,bold cterm=bold ctermbg=darkmagenta ctermfg=white
+hi User3 term=inverse,bold cterm=bold ctermbg=cyan ctermfg=white
+hi User4 term=inverse,bold cterm=bold ctermbg=grey ctermfg=white
+hi User5 term=inverse,bold cterm=bold ctermbg=red ctermfg=white
+hi User6 term=inverse,bold cterm=bold ctermbg=darkyellow ctermfg=white
+hi User7 term=inverse,bold cterm=bold ctermbg=blue ctermfg=white
+
+" statusline tweaks
+set statusline=
+set statusline +=%2*\ %{&ff}\ %*        "file format
+set statusline +=%6*\ %y\ %*            "file type
+set statusline +=%5*\ %<%F\ %*          "full path
+set statusline +=\ %m\                  "modified flag
+set statusline +=%5*%r%*                "read only flag
+set statusline +=%=                     "space
+"set statusline +=%7*%=\ pos:%12o\ %*    "current byte position
+set statusline +=%7*\ lines:%5l%*       "current line
+set statusline +=%7*/%L\ %*             "total lines
+set statusline +=%2*\ cols:%4c\ %*      "column number
+set statusline +=%1*%7P\ %*             "percentage through file
+set statusline+=%#warningmsg#
+" set statusline+=\ %{SyntasticStatuslineFlag()}\     " error counts
+set statusline+=%*
+
 " NERDTree
 map <unique> <leader>n :NERDTreeToggle<CR>
 
 " ACK
-map <unique> <leader>a <Esc>:Ack!
+map <leader>a :Ack
 
 " ctrl-p
 let g:ctrlp_map = '<leader>t'
@@ -96,24 +208,11 @@ let g:ctrlp_custom_ignore = {
     \ 'file': '\.pyc$\|\.pyo$\|\.rbc$|\.rbo$\|\.class$\|\.o$\|\~$\|\.DS_Store',
     \ 'link': 'some_bad_symbolic_links',
     \ }
+map <leader>b :CtrlPBuffer<CR>
 
 " jedi
 let g:jedi#use_tabs_not_buffers = 0
 let g:jedi#usages_command = '' " <leader>n already used by NERDTree
-
-" settings for vimwiki
-let g:vimwiki_folding = 1
-let g:vimwiki_fold_lists = 1
-let g:vimwiki_camel_case = 0
-let g:vimwiki_list = [{'path': '~/wiki/',                         'path_html': '~/wiki/export/',                         'diary_rel_path': 'date/',  'diary_index': 'Date', 'diary_header': 'Index', 'maxhi': 0, 'syntax': 'markdown', 'ext': '.md'},
-                    \ {'path': '~/workspace/sysop-private/zwiki', 'path_html': '~/workspace/sysop-private/zwiki/export', 'diary_rel_path': 'date/',  'diary_index': 'Date', 'diary_header': 'Index', 'maxhi': 0, 'syntax': 'markdown', 'ext': '.md'}]
-
-:hi VimwikiHeader1 guifg=#D700AF gui=bold ctermfg=163   term=bold cterm=bold
-:hi VimwikiHeader2 guifg=#8700FF gui=bold ctermfg=93    term=bold cterm=bold
-:hi VimwikiHeader3 guifg=#5F87FF gui=bold ctermfg=69    term=bold cterm=bold
-:hi VimwikiHeader4 guifg=#87AFFF gui=bold ctermfg=111   term=bold cterm=bold
-:hi VimwikiHeader5 guifg=#87AFFF gui=bold ctermfg=111   term=bold cterm=bold
-:hi VimwikiHeader6 guifg=#87AFFF gui=bold ctermfg=111   term=bold cterm=bold
 
 " markdown
 let g:vim_markdown_folding_disabled=1
@@ -130,7 +229,7 @@ let g:vim_markdown_folding_disabled=1
  endfunction
 
 " Abbreviation, wich calls the above function
-iab vimwiki <ESC>:call InsertWikiHeader()<CR>
+iab wikihead <ESC>:call InsertWikiHeader()<CR>
 
 " If buffer modified, update any 'updated' in the first 3 lines.
 " Restores cursor and window position using save_cursor variable.
@@ -174,3 +273,4 @@ endfunction
 
 command Soa :%s/\(2[0-9]\{7}\)\([0-9]\{2}\)\(\s*;\s*Serial\)/\=UPDSERIAL(submatch(1), submatch(2)) . submatch(3)/gci
 "---- eof ---------------------
+
