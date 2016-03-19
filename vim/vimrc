@@ -216,6 +216,10 @@ let g:jedi#usages_command = '' " <leader>n already used by NERDTree
 " markdown
 let g:vim_markdown_folding_disabled=1
 
+" vimwiki
+let g:vimwiki_list = [{'path': '~/wiki/', 'syntax': 'markdown', 'ext': '.md', 'diary_rel_path': 'date/', 'diary_index': 'index'}]
+nmap <Leader>wcr <Plug>VimwikiDiaryGenerateLinks
+
 " Function to insert a header in the vimwiki style
  function! InsertWikiHeader()
     let date = strftime('%A, %d. %B %Y', localtime())
@@ -229,6 +233,7 @@ let g:vim_markdown_folding_disabled=1
 
 " Abbreviation, wich calls the above function
 iab wikihead <ESC>:call InsertWikiHeader()<CR>
+nmap <leader>wh :call InsertWikiHeader()<CR>
 
 " If buffer modified, update any 'updated' in the first 3 lines.
 " Restores cursor and window position using save_cursor variable.

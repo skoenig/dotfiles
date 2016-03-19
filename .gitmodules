@@ -34,3 +34,12 @@
 [submodule "bundle/syntastic"]
     path = bundle/syntastic
     url = https://github.com/scrooloose/syntastic.git
+[submodule "bundle/puppet"]
+    path = bundle/puppet
+    url = git://github.com/rodjek/vim-puppet.git
+[submodule "bundle/tabular"]
+    path = bundle/tabular
+    url = git://github.com/godlygeek/tabular.git
+[submodule "bundle/vimwiki"]
+    path = bundle/vimwiki
+    url = https://github.com/vimwiki/vimwiki.git
