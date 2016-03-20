@@ -254,7 +254,9 @@ let g:jedi#use_tabs_not_buffers = 0
 let g:jedi#usages_command = '' " <leader>n already used by NERDTree
 
 " markdown
-let g:vim_markdown_folding_disabled=1
+let g:vim_markdown_folding_disabled = 0
+let g:vim_markdown_frontmatter = 1
+let g:vim_markdown_conceal = 0
 
 " vimwiki
 let g:vimwiki_list = [{'path': '~/wiki/', 'syntax': 'markdown', 'ext': '.md', 'diary_rel_path': 'date/', 'diary_index': 'index'}]
@@ -302,7 +304,7 @@ endfunction
 iab pytemplate <ESC>:call InsertPythonTemplate()<CR>
 
 " filetype detection
-au BufNewFile,BufRead *.markdown,*.mdown,*.mkd,*.mkdn,*.md set ft=markdown
+au BufNewFile,BufRead *.markdown,*.mdown,*.mkd,*.mkdn,*.md set ft=markdown wrap
 au BufNewFile,BufRead *.jinja set ft=jinja
 au BufNewFile,BufRead todo.txt,done.txt set filetype=todo
 au BufNewFile,BufRead *pp set filetype=puppet
