@@ -1,11 +1,50 @@
 " Use Vim settings, rather then Vi settings (much better!).
 " This must be first, because it changes other options as a side effect.
-
 set nocompatible
-call pathogen#infect()
 
 " automatic reloading of .vimrc
 autocmd! bufwritepost .vimrc source %
+
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall | source $MYVIMRC
+endif
+
+call plug#begin('~/.vim/bundle')
+
+" Colorschemes
+Plug 'joedicastro/vim-molokai256'
+Plug 'chriskempson/vim-tomorrow-theme'
+Plug 'chriskempson/base16-vim'
+Plug 'NLKNguyen/papercolor-theme'
+Plug 'junegunn/seoul256.vim'
+Plug 'jnurmine/zenburn'
+Plug 'jonathanfilip/vim-lucius'
+Plug 'dfrnswrth/vim-codeburn'
+
+" Everything else...
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'bling/vim-airline'
+Plug 'fatih/vim-go'
+Plug 'freitass/todo.txt-vim'
+Plug 'j5shi/searchcomplete'
+Plug 'junegunn/limelight.vim'
+Plug 'kien/ctrlp.vim'
+Plug 'mileszs/ack.vim'
+Plug 'msanders/snipmate.vim'
+Plug 'robertkrimen/vim-gnupg'
+Plug 'scrooloose/syntastic'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-eunuch'
+Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
+Plug 'rodjek/vim-puppet'
+Plug 'vim-scripts/buftabs'
+Plug 'godlygeek/tabular'
+Plug 'vimwiki/vimwiki'
+
+filetype plugin indent on " required!
+call plug#end()
 
 " remove trailing whitespaces
 fun! <SID>StripTrailingWhitespaces()
@@ -58,6 +97,7 @@ endif
 if !exists('g:loaded_matchit') && findfile('plugin/matchit.vim', &rtp) ==# ''
   runtime! macros/matchit.vim
 endif
+
 
 " Make Y consistent with C and D.  See :help Y.
 nnoremap Y y$
@@ -194,13 +234,13 @@ set statusline+=%#warningmsg#
 set statusline+=%*
 
 " NERDTree
-map <unique> <leader>n :NERDTreeToggle<CR>
+map <leader>n :NERDTreeToggle<CR>
 
 " ACK
 map <leader>a :Ack
 
 " ctrl-p
-let g:ctrlp_map = '<leader>t'
+let g:ctrlp_map = '<leader>p'
 let g:ctrlp_working_path_mode = 0
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc,*~"
 let g:ctrlp_custom_ignore = {
@@ -266,6 +306,9 @@ au BufNewFile,BufRead *.markdown,*.mdown,*.mkd,*.mkdn,*.md set ft=markdown
 au BufNewFile,BufRead *.jinja set ft=jinja
 au BufNewFile,BufRead todo.txt,done.txt set filetype=todo
 au BufNewFile,BufRead *pp set filetype=puppet
+
+" airline
+let g:airline_powerline_fonts = 1
 
 "--- .../plugins/named.vim ----
 function! UPDSERIAL(date, num)
