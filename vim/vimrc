@@ -253,6 +253,15 @@ let g:ctrlp_custom_ignore = {
 let g:jedi#use_tabs_not_buffers = 0
 let g:jedi#usages_command = '' " <leader>n already used by NERDTree
 
+" syntastic
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
+let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
+let g:syntastic_python_checkers = ['flake8']
+
 " markdown
 let g:vim_markdown_folding_disabled = 0
 let g:vim_markdown_frontmatter = 1
