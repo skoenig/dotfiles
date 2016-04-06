@@ -146,6 +146,7 @@ set tabstop=4         " spaces to set tabwidth to
 set expandtab         " convert tabs to spaces
 set foldmethod=marker " automatically fold by marker {{{ }}}
 set foldenable        " all folds closed by default
+set foldclose=all     " automatically close fold when not in it
 set textwidth=0       " textwidth used by used for wrapping
 set formatoptions+=t  " automatic wrapping
 set autoindent
@@ -269,6 +270,8 @@ let g:vim_markdown_conceal = 0
 
 " vimwiki
 let g:vimwiki_list = [{'path': '~/wiki/', 'syntax': 'markdown', 'ext': '.md', 'diary_rel_path': 'date/', 'diary_index': 'index'}]
+let g:vimwiki_folding = 'expr'
+let g:vimwiki_global_ext = 0
 nmap <Leader>wcr <Plug>VimwikiDiaryGenerateLinks
 
 " Function to insert a header in the vimwiki style
