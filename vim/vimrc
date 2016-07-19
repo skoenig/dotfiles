@@ -321,6 +321,7 @@ au BufNewFile,BufRead *.markdown,*.mdown,*.mkd,*.mkdn,*.md set ft=markdown wrap
 au BufNewFile,BufRead *.jinja set ft=jinja
 au BufNewFile,BufRead todo.txt,done.txt set filetype=todo
 au BufNewFile,BufRead *pp set filetype=puppet
+"au BufNewFile,BufRead *.go setlocal noet ts=4 sw=4 sts=4
 
 " airline
 let g:airline_powerline_fonts = 1
