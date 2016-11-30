@@ -273,6 +273,7 @@ let g:vimwiki_list = [{'path': '~/Dropbox/wiki/', 'syntax': 'markdown', 'ext': '
 let g:vimwiki_use_calendar = 1
 let g:vimwiki_folding = 'expr'
 let g:vimwiki_global_ext = 0
+let g:vimwiki_listsyms = ' ○◐●✓'
 nmap <Leader>wcr <Plug>VimwikiDiaryGenerateLinks
 
 " Function to insert a header in the vimwiki style
