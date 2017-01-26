@@ -164,7 +164,6 @@ set ttimeoutlen=50
 set incsearch
 set laststatus=2
 set wildmenu
-set nowrap
 set langmenu=en
 set helplang=en
 set relativenumber
