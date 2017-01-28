@@ -261,6 +261,14 @@ let g:syntastic_check_on_wq = 0
 let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
 let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
 let g:syntastic_python_checkers = ['flake8']
+function! FindConfig(prefix, what, where)
+    let cfg = findfile(a:what, escape(a:where, ' ') . ';')
+    return cfg !=# '' ? ' ' . a:prefix . ' ' . shellescape(cfg) : ''
+endfunction
+
+autocmd FileType python let b:syntastic_python_flake8_args =
+    \ get(g:, 'syntastic_python_flake8_args', '') .
+    \ FindConfig('--config', '.flake8', expand('<afile>:p:h', 1))
 
 " markdown
 let g:vim_markdown_folding_disabled = 0
