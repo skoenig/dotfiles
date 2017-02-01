@@ -7,14 +7,9 @@ wmname LG3D
 hsetroot -solid "#333333" &
 feh --bg-fill ~/graphic/wallpapers/nature/nature_190.png &
 
+## GNOME PolicyKit authentication
 ## this may be also needed by nm-applet
 #/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 &
-
-## Start daemons
-#gnome-screensaver &
-~/.dropbox-dist/dropboxd &
-
-cd ~
 
 ## GNOME PolicyKit and Keyring
 eval $(gnome-keyring-daemon --start --components=pkcs11,secrets,ssh,gpg)
