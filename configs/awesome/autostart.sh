@@ -9,7 +9,7 @@ feh --bg-fill ~/graphic/wallpapers/nature/nature_190.png &
 
 ## GNOME PolicyKit authentication
 ## this may be also needed by nm-applet
-#/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 &
+/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 &
 
 if [[ -f /etc/debian_version && -f $HOME/.config/awesome/rc.lua-debian ]]
 then
