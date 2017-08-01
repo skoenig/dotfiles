@@ -14,7 +14,7 @@ feh --bg-fill ~/graphic/wallpapers/nature/nature_190.png &
 if [[ -f /etc/debian_version && -f $HOME/.config/awesome/rc.lua-debian ]]
 then
     config="--config $HOME/.config/awesome/rc.lua-debian"
-    if [[ $(cat /etc/debian_version) == "9.0" ]]
+    if [[ $(cat /etc/debian_version) == 9.* ]]
     then
         config="$config-new"
     fi
