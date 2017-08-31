@@ -318,12 +318,6 @@ function! InsertPythonHeader()
 endfunction
 iab pyhead <ESC>:call InsertPythonHeader()<CR>
 
-function! InsertPythonTemplate()
-    exec "normal! ggO"
-    r ~/workspace/scripts/python/python_template.py
-endfunction
-iab pytemplate <ESC>:call InsertPythonTemplate()<CR>
-
 " filetype detection
 au BufNewFile,BufRead *.markdown,*.mdown,*.mkd,*.mkdn,*.md set ft=markdown wrap
 au BufNewFile,BufRead *.jinja set ft=jinja
