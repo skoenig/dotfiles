@@ -188,8 +188,8 @@ nnoremap <F5> :set list!<CR>
 nnoremap <F6> :set wrap!<CR>
 
 " Switch buffers
-map <C-Right> :bnext<CR>
-map <C-Left>  :bprev<CR>
+map <leader><Right> :bnext<CR>
+map <leader><Left>  :bprev<CR>
 
 " Shift lines up and down in (n)ormal, (i)nsert and (v)isual modi
 nnoremap <C-j> mz:m+<CR>`z
