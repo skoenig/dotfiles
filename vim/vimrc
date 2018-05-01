@@ -268,12 +268,15 @@ let g:vim_markdown_frontmatter = 1
 let g:vim_markdown_conceal = 0
 
 " vimwiki
-let g:vimwiki_list = [{'path': '~/Dropbox/wiki/', 'syntax': 'markdown', 'ext': '.md', 'diary_rel_path': 'date/', 'diary_index': 'index'}]
+let g:vimwiki_list = [{'path': '~/Sync/wiki/', 'syntax': 'markdown', 'ext': '.md', 'diary_rel_path': 'date/', 'diary_index': 'index'}]
 let g:vimwiki_use_calendar = 1
 let g:vimwiki_folding = 'expr'
 let g:vimwiki_global_ext = 0
 let g:vimwiki_listsyms = ' ○◐●✓'
 nmap <Leader>wcr <Plug>VimwikiDiaryGenerateLinks
+nmap <Leader>wc <Plug>Vimwiki2HTML
+nmap <Leader><Up> <Plug>VimwikiDiaryPrevDay
+nmap <Leader><Down> <Plug>VimwikiDiaryNextDay
 
 " Function to insert a header in the vimwiki style
  function! InsertWikiHeader()
