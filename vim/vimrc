@@ -191,14 +191,6 @@ nnoremap <F6> :set wrap!<CR>
 map <leader><Right> :bnext<CR>
 map <leader><Left>  :bprev<CR>
 
-" Shift lines up and down in (n)ormal, (i)nsert and (v)isual modi
-nnoremap <C-j> mz:m+<CR>`z
-nnoremap <C-k> mz:m-2<CR>`z
-"inoremap <C-j> <Esc>:m+<CR>gi
-"inoremap <C-k> <Esc>:m-2<CR>gi
-vnoremap <C-j> :m'>+<CR>gv=`<my`>mzgv`yo`z
-vnoremap <C-k> :m'<-2<CR>gv=`>my`<mzgv`yo`z
-
 " Convenient command to see the difference between the current buffer and the
 " file it was loaded from, thus the changes you made.
 " Only define it when not defined already.
