@@ -6,6 +6,9 @@ wmname LG3D
 ## Set root window colour
 hsetroot -solid "#333333" &
 
+## Start DropBox
+~/.dropbox-dist/dropboxd &
+
 if [[ -f /etc/debian_version && -f $HOME/.config/awesome/rc-debian.lua ]]
 then
     config="--config $HOME/.config/awesome/rc-debian.lua"
