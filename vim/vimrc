@@ -307,12 +307,6 @@ function! LastModified()
 endfun
 autocmd BufWritePre * call LastModified()
 
-" python snippets
-function! InsertPythonHeader()
-    exec "normal! ggO#!/usr/bin/env python\<CR># -*- coding: utf-8 -*-\<CR>"
-endfunction
-iab pyhead <ESC>:call InsertPythonHeader()<CR>
-
 " filetype detection
 au BufNewFile,BufRead *.markdown,*.mdown,*.mkd,*.mkdn,*.md set ft=markdown wrap
 au BufNewFile,BufRead *.jinja set ft=jinja
