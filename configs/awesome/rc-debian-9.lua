@@ -1,4 +1,4 @@
--- *created Tuesday, 10. December 2013 - updated Friday, 20. April 2018*
+-- *created Tuesday, 10. December 2013 - updated Friday, 13. September 2019*
 -- Standard awesome library
 local gears = require("gears")
 local awful = require("awful")
@@ -294,7 +294,7 @@ mykeyboardlayout = awful.widget.keyboardlayout()
 
 -- {{{ Wibar
 -- Create a textclock widget
-mytextclock = wibox.widget.textclock()
+mytextclock = wibox.widget.textclock(" CW%V: %a, %d. %b %H:%M ")
 
 -- Create a wibox for each screen and add it
 local taglist_buttons = awful.util.table.join(
