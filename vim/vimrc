@@ -47,17 +47,7 @@ filetype plugin indent on " required!
 call plug#end()
 
 " remove trailing whitespaces
-fun! <SID>StripTrailingWhitespaces()
-    let l = line(".")
-    let c = col(".")
-    %s/\s\+$//e
-    call cursor(l, c)
-endfun
-
-if has('autocmd')
-    filetype plugin indent on
-    autocmd BufWritePre *.* :call <SID>StripTrailingWhitespaces()
-endif
+autocmd BufWritePre * %s/\s\+$//e
 
 " Enable syntax highlighting
 if has('syntax') && !exists('g:syntax_on')
@@ -253,6 +243,7 @@ let g:syntastic_check_on_wq = 0
 let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
 let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
 let g:syntastic_python_checkers = ['flake8']
+
 function! FindConfig(prefix, what, where)
     let cfg = findfile(a:what, escape(a:where, ' ') . ';')
     return cfg !=# '' ? ' ' . a:prefix . ' ' . shellescape(cfg) : ''
