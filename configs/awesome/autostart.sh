@@ -6,8 +6,10 @@ wmname LG3D
 ## Set root window colour
 hsetroot -solid "#333333" &
 
-## Start DropBox
+## Start background services
 ~/.dropbox-dist/dropboxd &
+redshift-gtk &
+nm-applet &
 
 if [[ -f /etc/debian_version && -f $HOME/.config/awesome/rc-debian.lua ]]
 then
