@@ -35,6 +35,7 @@ Plug 'mileszs/ack.vim'
 Plug 'msanders/snipmate.vim'
 Plug 'jamessan/vim-gnupg'
 Plug 'scrooloose/syntastic'
+Plug 'ambv/black'                       " Python autoformat
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-eunuch'
 Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
@@ -259,6 +260,10 @@ endfunction
 autocmd FileType python let b:syntastic_python_flake8_args =
     \ get(g:, 'syntastic_python_flake8_args', '') .
     \ FindConfig('--config', '.flake8', expand('<afile>:p:h', 1))
+
+" configure black and run on file close.
+let g:black_skip_string_normalization = 1
+autocmd BufWritePre *.py execute ':Black'
 
 " markdown
 let g:vim_markdown_folding_disabled = 0
