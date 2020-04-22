@@ -1,0 +1,219 @@
+#!/bin/bash
+
+if [[ $- != *i* ]]
+then
+	# Shell is non-interactive.  Be done now!
+	return
+fi
+
+xhost +local:root > /dev/null 2>&1
+
+complete -cf sudo
+
+# Bash won't get SIGWINCH if another process is in the foreground.
+# Enable checkwinsize so that bash will check the terminal size when
+# it regains control.  #65623
+# http://cnswww.cns.cwru.edu/~chet/bash/FAQ (E11)
+shopt -s checkwinsize
+shopt -s cdspell
+shopt -s expand_aliases
+shopt -s cmdhist
+shopt -s dotglob
+shopt -s extglob
+
+# Enable history appending instead of overwriting.  #139609
+shopt -s histappend
+
+# Save and reload the history after each command finishes
+#export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
+
+# Make less more friendly for non-text input files, see lesspipe(1)
+[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+
+export TERM=rxvt-unicode
+
+color_bash () {
+    local NONE="\[\033[0m\]"
+
+    # regular colors
+    local K="\[\033[0;30m\]"     # black
+    local R="\[\033[0;31m\]"     # red
+    local G="\[\033[0;32m\]"     # green
+    local Y="\[\033[0;33m\]"     # yellow
+    local B="\[\033[0;34m\]"     # blue
+    local M="\[\033[0;35m\]"     # magenta
+    local C="\[\033[0;36m\]"     # cyan
+    local W="\[\033[0;37m\]"     # white
+    local O="\[\033[38;5;214m\]" # orange http://misc.flogisoft.com/bash/tip_colors_and_formatting
+
+    # emphasized (bolded) colors
+    local EMK="\[\033[1;30m\]"
+    local EMR="\[\033[1;31m\]"
+    local EMG="\[\033[1;32m\]"
+    local EMY="\[\033[1;33m\]"
+    local EMB="\[\033[1;34m\]"
+    local EMM="\[\033[1;35m\]"
+    local EMC="\[\033[1;36m\]"
+    local EMW="\[\033[1;37m\]"
+
+    # background colors
+    local BGK="\[\033[40m\]"
+    local BGR="\[\033[41m\]"
+    local BGG="\[\033[42m\]"
+    local BGY="\[\033[43m\]"
+    local BGB="\[\033[44m\]"
+    local BGM="\[\033[45m\]"
+    local BGC="\[\033[46m\]"
+    local BGW="\[\033[47m\]"
+
+    local host=$(hostname -s)
+	case $host in
+		"moobar") color=$O ;;
+		"bender") color=$EMB ;;
+		"hack")   color=$EMK ;;
+		"rpi")    color=$EMG ;;
+		*)		  color=$EMC ;;
+	esac
+
+    export PS1="${debian_chroot:+($debian_chroot)}${EMG}[\u${NONE}@${color}\h${NONE} \W${EMG}]$ ${NONE}"
+}
+
+if which tput > /dev/null 2>&1 && [[ $(tput -T$TERM colors) -ge 8 ]]
+then
+    color_bash
+fi
+
+# Switch colorscheme depending on the time of the day.
+hour=$(date +%H)
+if [[ 8 -le $hour && $hour -le 17 ]]
+then
+  background=2
+else
+  background=1
+fi
+sed -i "s|last_colorset=.*\$|last_colorset=$background|" ~/.config/sakura/sakura.conf
+
+# better yaourt colors
+export YAOURT_COLORS="nb=1:pkg=1:ver=1;32:lver=1;45:installed=1;42:grp=1;34:od=1;41;5:votes=1;44:dsc=0:other=1;35"
+
+# Aliases
+# Source Bash aliases, if they are in a separate file
+if [ -r ~/.bash_alias ]
+then
+    source ~/.bash_alias
+fi
+
+# enable color support for grep
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias grep='grep --color=auto'
+    alias ls='ls --color=auto'
+fi
+alias ls='ls --color=auto --time-style=long-iso'
+alias l='ls -1'
+alias la='ls -lA'
+alias ll='ls -l'
+alias cp="cp -i"
+alias rm='rm -i'
+alias mv='mv -i'
+alias df='df -hP'
+alias more=less
+alias free='free -m'
+alias findbigfiles="find . -type f -printf '%s\t\"%p\"\n' | sort -n"
+alias emacs='emacs -nw'
+alias kazam='kazam --nosound'
+alias abook="abook --datafile /home/skoenig/workspace/scripts/configs/mail/addressbook"
+alias mplay="sudo mplayer -vo fbdev2 -xy 1280 -zoom -fs "
+#alias muttfreenet="TERM=xterm-256color mutt -F ~/mail/muttrc-freenet"
+#alias muttzalando="TERM=xterm-256color mutt -F ~/mail/muttrc-zalando"
+#alias muttzoho="TERM=xterm-256color mutt -F ~/mail/muttrc-zoho"
+alias muttfreenet="mutt -F ~/mail/muttrc-freenet"
+alias muttzalando="mutt -F ~/mail/muttrc-zalando"
+alias muttzoho="mutt -F ~/mail/muttrc-zoho"
+alias password="apg -n 1 -a 0 -m 9 -x 9"
+alias puppetlog="perl -pe 's/\e\[\d+\;\d+m//g' <( puppet agent -t --noop ) > puppet_$(date +%F)"
+alias pycharm='wmname LG3D; /usr/local/bin/pycharm'
+alias translate="grep -hwi /usr/share/dict/de-en.txt /usr/share/trans/de-en -e"
+#alias trash='mv -v -t ~/.Trash'
+alias trash='trash-put'
+alias unbase64="perl -MMIME::Base64 -MEncode=decode -n -00 -e 's/\n +//g;s/(?<=:: )(\S+)/decode(\"UTF-8\",decode_base64(\$1))/eg;print'"
+alias whatthecommit="curl http://whatthecommit.com/index.txt"
+alias wakehack='wakeonlan 00:23:54:2f:2e:a5'
+alias bat='upower -i /org/freedesktop/UPower/devices/battery_BAT1 | grep -E "state|time\ to|percentage"'
+alias feh='feh --force-aliasing --scale-down '
+alias sakura='sakura --working-directory ~/.config/sakura'
+alias dockerclean="docker images | awk '/^<none>/ {print \$3}' | xargs -r docker rmi"
+
+# Arch Linux
+alias yed='wmname LG3D; /usr/local/bin/yed'
+alias yaourt='env http_proxy="192.168.1.101:3142" yaourt'
+alias np='vim -w PKGBUILD'
+alias fixit='sudo rm -f /var/lib/pacman/db.lck && sudo pacman-mirrors -g && sudo pacman -Syyuu && sudo pacman -Suu'
+alias pacman='sudo env http_proxy="192.168.1.101:3142" pacman'
+cleanse() {
+        sudo pacman -Rns $(pacman -Qtdq) ;
+        sudo pacman -Scc ;
+        sudo pacman-optimize ;
+        bleachbit -c --preset ;
+        sudo bleachbit -c --preset
+}
+
+# Zalando
+alias pipzalando="sudo pip install --upgrade --extra-index-url http://repo.zalando/pypi"
+alias windows="rdesktop -g 1915x1020 -a 32 -u 'corp\skoenig-d' z-wnmgmt01.corp.ad.zalando.net"
+alias ldaplastnumber="ldapsearch -h auth01.zalando -Y GSSAPI -b dc=zalando,dc=net -s sub '(objectClass=posixAccount)' uidNumber | grep uidNumber | sort -n -k 2"
+alias ldapsearchz="ldapsearch -h auth01.zalando -Y GSSAPI -b dc=zalando,dc=net"
+alias ldapviz="ldapvi -h auth01.zalando -Y GSSAPI --bind sasl"
+
+# mpc aliases
+alias mpc='mpc --format "%position% %artist%\t\t%album%\t\t%track%. %title%" '
+mpc_save () {
+	mpc save $(date +%F_%H-%M)
+}
+mpc_addsong  () {
+	mpc search any "$*" | mpc add
+ }
+mpc_addrandom () {
+	mpc listall | sed -n $[RANDOM % $(mpc stats | grep Songs | awk '{print $2}')+1]p | mpc add
+ }
+mpc_jump () {
+	 mpc playlist | grep -i "$*" | grep -o '^[0-9]\+' | head -1 | xargs mpc play
+ }
+asc () {
+    ssh -t "$@" 'screen -DRU'
+}
+
+pullrequest () {
+    git push origin HEAD
+    hub pull-request -o -m $(git rev-parse --abbrev-ref HEAD)
+}
+commitagain () {
+    git commit -c `git log -1 --format=%H "$@"` "$@"
+}
+
+svg2eps () {
+    for file in *svg
+    do
+        inkscape --without-gui --file="${file}" --export-eps="${file/svg/eps}" --export-dpi=300 --export-ignore-filters --export-ps-level=3
+    done
+}
+
+cheat () {
+    curl -m 3 "http://cheat.sh/$1";
+}
+
+if [ -r /usr/share/bash-completion/bash_completion ]
+then
+    source /usr/share/bash-completion/bash_completion
+fi
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/home/skoenig/bin/google-cloud-sdk/path.bash.inc' ]; then . '/home/skoenig/bin/google-cloud-sdk/path.bash.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/home/skoenig/bin/google-cloud-sdk/completion.bash.inc' ]; then . '/home/skoenig/bin/google-cloud-sdk/completion.bash.inc'; fi
+
+command -v "zkubectl" &>/dev/null && source <(zkubectl completion bash)
+
+[ -x /usr/bin/xmodmap ] && [ -f ~/.Xmodmap ] && [ ${#DISPLAY} -ne 0 ] && /usr/bin/xmodmap ~/.Xmodmap
+
