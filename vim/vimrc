@@ -38,7 +38,7 @@ Plug 'scrooloose/syntastic'
 Plug 'ambv/black'                       " Python autoformat
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-eunuch'
-Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
+Plug 'plasticboy/vim-markdown', { 'for': 'markdown', 'commit': '3fcde7215e22913f004c2836fd46ff61746be6db' }
 Plug 'rodjek/vim-puppet'
 Plug 'vim-scripts/buftabs'
 Plug 'godlygeek/tabular'
@@ -260,6 +260,7 @@ let g:black_skip_string_normalization = 1
 autocmd BufWritePre *.py execute ':Black'
 
 " markdown
+let g:vim_markdown_folding_style_pythonic = 1
 let g:vim_markdown_folding_disabled = 0
 let g:vim_markdown_frontmatter = 1
 let g:vim_markdown_conceal = 0
