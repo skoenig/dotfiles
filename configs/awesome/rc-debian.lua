@@ -1,4 +1,4 @@
--- *created Tuesday, 10. December 2013 - updated Friday, 23. September 2016*
+-- *created Tuesday, 10. December 2013 - updated Saturday, 20. June 2020*
 -- Standard awesome library
 local awful = require("awful")
 awful.rules = require("awful.rules")
@@ -14,7 +14,7 @@ local menubar = require("menubar")
 -- Load Debian menu entries
 require("debian.menu")
 -- widgets
-require("vicious")
+local vicious = require("vicious")
 
 -- {{{ Widgets
 -- Initialize widgets
