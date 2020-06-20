@@ -20,6 +20,5 @@ then
         config="--config $HOME/.config/awesome/rc-debian-${version}.lua"
     fi
 fi
-## ck-launch-session: nm-applet needs this to run w/h root privileges + installed gksu
-#exec ck-launch-session awesome $config >> ~/.cache/awesome/stdout 2>> ~/.cache/awesome/stderr
+
 exec awesome $config >> ~/.cache/awesome/stdout 2>> ~/.cache/awesome/stderr
