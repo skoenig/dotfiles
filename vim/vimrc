@@ -22,6 +22,8 @@ Plug 'junegunn/seoul256.vim'
 Plug 'jnurmine/zenburn'
 Plug 'jonathanfilip/vim-lucius'
 Plug 'dfrnswrth/vim-codeburn'
+Plug 'notpratheek/vim-luna'
+Plug 'sonph/onehalf', {'rtp': 'vim/'}
 
 " Everything else...
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
@@ -88,14 +90,16 @@ endif
 nnoremap Y y$
 
 set t_Co=256
-colorscheme PaperColor
+" colorscheme PaperColor
 
 " Switch colorscheme depending on the time of the day.
 let hour = strftime("%H")
-if 8 <= hour && hour <= 17
-  set background=light
+if 8 <= hour && hour <= 19
+  " set background=light
+  colorscheme onehalflight
 else
-  set background=dark
+  " set background=dark
+  colorscheme onehalfdark
 endif
 
 " set guifont
