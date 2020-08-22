@@ -167,6 +167,7 @@ set novisualbell
 set colorcolumn=80
 set scrolloff=10
 set sidescrolloff=10
+set diffopt+=iwhite
 
 " toggle copy & paste mode
 set pastetoggle=<F2>
