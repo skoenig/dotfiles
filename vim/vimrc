@@ -45,6 +45,7 @@ Plug 'vim-scripts/buftabs'
 Plug 'godlygeek/tabular'
 Plug 'vimwiki/vimwiki'
 Plug 'editorconfig/editorconfig-vim'
+Plug 'hashivim/vim-terraform'
 
 filetype plugin indent on " required!
 call plug#end()
@@ -263,6 +264,10 @@ autocmd FileType python let b:syntastic_python_flake8_args =
 " configure black and run on file close.
 let g:black_skip_string_normalization = 1
 autocmd BufWritePre *.py execute ':Black'
+
+" terraform
+let g:terraform_align=1
+let g:terraform_fmt_on_save=1
 
 " markdown
 let g:vim_markdown_folding_style_pythonic = 1
