@@ -1,0 +1,14 @@
+[core]
+    editor = vim
+    excludesfile = ~/.gitignore
+    whitespace = trailing-space,space-before-tab
+[alias]
+    lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
+[color]
+    ui = auto
+[diff]
+    renames = copies
+[push]
+    default = matching
+[pull]
+    rebase = true
