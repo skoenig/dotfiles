@@ -8,7 +8,12 @@ fi
 
 xhost +local:root > /dev/null 2>&1
 
-complete -cf sudo
+# Enable history appending instead of overwriting.  #139609
+shopt -s histappend
+
+
+# Save and reload the history after each command finishes
+#export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 
 # Bash won't get SIGWINCH if another process is in the foreground.
 # Enable checkwinsize so that bash will check the terminal size when
@@ -21,13 +26,9 @@ shopt -s cmdhist
 shopt -s dotglob
 shopt -s extglob
 
-# Enable history appending instead of overwriting.  #139609
-shopt -s histappend
+complete -cf sudo
 
-# Save and reload the history after each command finishes
-#export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
-
-# Make less more friendly for non-text input files, see lesspipe(1)
+# make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
 export TERM=rxvt-unicode
@@ -83,15 +84,6 @@ then
     color_bash
 fi
 
-# Switch colorscheme depending on the time of the day.
-hour=$(date +%H)
-if [[ 8 -le $hour && $hour -le 17 ]]
-then
-  background=2
-else
-  background=1
-fi
-sed -i "s|last_colorset=.*\$|last_colorset=$background|" ~/.config/sakura/sakura.conf
 
 # better yaourt colors
 export YAOURT_COLORS="nb=1:pkg=1:ver=1;32:lver=1;45:installed=1;42:grp=1;34:od=1;41;5:votes=1;44:dsc=0:other=1;35"
@@ -103,15 +95,16 @@ then
     source ~/.bash_alias
 fi
 
-# enable color support for grep
+# enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias ls='ls --color=auto --time-style=long-iso'
     alias grep='grep --color=auto'
-    alias ls='ls --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
 fi
-alias ls='ls --color=auto --time-style=long-iso'
+
 alias l='ls -1'
-alias la='ls -lA'
 alias ll='ls -l'
 alias cp="cp -i"
 alias rm='rm -i'
@@ -121,23 +114,12 @@ alias more=less
 alias free='free -m'
 alias findbigfiles="find . -type f -printf '%s\t\"%p\"\n' | sort -n"
 alias emacs='emacs -nw'
-alias kazam='kazam --nosound'
-alias abook="abook --datafile /home/skoenig/workspace/scripts/configs/mail/addressbook"
-alias mplay="sudo mplayer -vo fbdev2 -xy 1280 -zoom -fs "
-#alias muttfreenet="TERM=xterm-256color mutt -F ~/mail/muttrc-freenet"
-#alias muttzalando="TERM=xterm-256color mutt -F ~/mail/muttrc-zalando"
-#alias muttzoho="TERM=xterm-256color mutt -F ~/mail/muttrc-zoho"
-alias muttfreenet="mutt -F ~/mail/muttrc-freenet"
-alias muttzalando="mutt -F ~/mail/muttrc-zalando"
-alias muttzoho="mutt -F ~/mail/muttrc-zoho"
 alias password="apg -n 1 -a 0 -m 9 -x 9"
 alias puppetlog="perl -pe 's/\e\[\d+\;\d+m//g' <( puppet agent -t --noop ) > puppet_$(date +%F)"
-alias pycharm='wmname LG3D; /usr/local/bin/pycharm'
 alias translate="grep -hwi /usr/share/dict/de-en.txt /usr/share/trans/de-en -e"
 #alias trash='mv -v -t ~/.Trash'
 alias trash='trash-put'
-alias unbase64="perl -MMIME::Base64 -MEncode=decode -n -00 -e 's/\n +//g;s/(?<=:: )(\S+)/decode(\"UTF-8\",decode_base64(\$1))/eg;print'"
-alias whatthecommit="curl http://whatthecommit.com/index.txt"
+alias whatthecommit="curl -s http://whatthecommit.com/index.txt"
 alias wakehack='wakeonlan 00:23:54:2f:2e:a5'
 alias bat='upower -i /org/freedesktop/UPower/devices/battery_BAT1 | grep -E "state|time\ to|percentage"'
 alias feh='feh --force-aliasing --scale-down '
@@ -198,14 +180,30 @@ svg2eps () {
     done
 }
 
-cheat () {
+
+cheat.sh () {
     curl -m 3 "http://cheat.sh/$1";
 }
+
+gch () { git checkout "$(git branch --all | fzf | tr -d '[:space:]')"; }
+
+# Switch colorscheme depending on the time of the day.
+hour=$(date +%H)
+if [[ $hour -ge 8 && $hour -le 15 ]]
+then
+  background=2
+else
+  background=1
+fi
+sed -i "s|last_colorset=.*\$|last_colorset=$background|" ~/.config/sakura/sakura.conf
+
 
 if [ -r /usr/share/bash-completion/bash_completion ]
 then
     source /usr/share/bash-completion/bash_completion
 fi
+
+[ -x /usr/bin/xmodmap ] && [ -f ~/.Xmodmap ] && [ ${#DISPLAY} -ne 0 ] && /usr/bin/xmodmap ~/.Xmodmap
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/home/skoenig/bin/google-cloud-sdk/path.bash.inc' ]; then . '/home/skoenig/bin/google-cloud-sdk/path.bash.inc'; fi
@@ -215,5 +213,4 @@ if [ -f '/home/skoenig/bin/google-cloud-sdk/completion.bash.inc' ]; then . '/hom
 
 command -v "zkubectl" &>/dev/null && source <(zkubectl completion bash)
 
-[ -x /usr/bin/xmodmap ] && [ -f ~/.Xmodmap ] && [ ${#DISPLAY} -ne 0 ] && /usr/bin/xmodmap ~/.Xmodmap
 
