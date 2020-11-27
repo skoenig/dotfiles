@@ -2,15 +2,14 @@
 
 if [[ $- != *i* ]]
 then
-	# Shell is non-interactive.  Be done now!
-	return
+    # Shell is non-interactive.  Be done now!
+    return
 fi
 
 xhost +local:root > /dev/null 2>&1
 
 # Enable history appending instead of overwriting.  #139609
 shopt -s histappend
-
 
 # Save and reload the history after each command finishes
 #export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
@@ -68,13 +67,13 @@ color_bash () {
     local BGW="\[\033[47m\]"
 
     local host=$(hostname -s)
-	case $host in
-		"moobar") color=$O ;;
-		"bender") color=$EMB ;;
-		"hack")   color=$EMK ;;
-		"rpi")    color=$EMG ;;
-		*)		  color=$EMC ;;
-	esac
+    case $host in
+        "moobar") color=$O ;;
+        "bender") color=$EMB ;;
+        "hack")   color=$EMK ;;
+        "rpi")    color=$EMG ;;
+        *)        color=$EMC ;;
+    esac
 
     export PS1="${debian_chroot:+($debian_chroot)}${EMG}[\u${NONE}@${color}\h${NONE} \W${EMG}]$ ${NONE}"
 }
@@ -83,10 +82,6 @@ if which tput > /dev/null 2>&1 && [[ $(tput -T$TERM colors) -ge 8 ]]
 then
     color_bash
 fi
-
-
-# better yaourt colors
-export YAOURT_COLORS="nb=1:pkg=1:ver=1;32:lver=1;45:installed=1;42:grp=1;34:od=1;41;5:votes=1;44:dsc=0:other=1;35"
 
 # Aliases
 # Source Bash aliases, if they are in a separate file
@@ -114,8 +109,7 @@ alias more=less
 alias free='free -m'
 alias findbigfiles="find . -type f -printf '%s\t\"%p\"\n' | sort -n"
 alias emacs='emacs -nw'
-alias password="apg -n 1 -a 0 -m 9 -x 9"
-alias puppetlog="perl -pe 's/\e\[\d+\;\d+m//g' <( puppet agent -t --noop ) > puppet_$(date +%F)"
+alias password="apg -n 1 -a 0 -m 15 -x 15"
 alias translate="grep -hwi /usr/share/dict/de-en.txt /usr/share/trans/de-en -e"
 #alias trash='mv -v -t ~/.Trash'
 alias trash='trash-put'
@@ -126,51 +120,35 @@ alias feh='feh --force-aliasing --scale-down '
 alias sakura='sakura --working-directory ~/.config/sakura'
 alias dockerclean="docker images | awk '/^<none>/ {print \$3}' | xargs -r docker rmi"
 
-# Arch Linux
-alias yed='wmname LG3D; /usr/local/bin/yed'
-alias yaourt='env http_proxy="192.168.1.101:3142" yaourt'
-alias np='vim -w PKGBUILD'
-alias fixit='sudo rm -f /var/lib/pacman/db.lck && sudo pacman-mirrors -g && sudo pacman -Syyuu && sudo pacman -Suu'
-alias pacman='sudo env http_proxy="192.168.1.101:3142" pacman'
-cleanse() {
-        sudo pacman -Rns $(pacman -Qtdq) ;
-        sudo pacman -Scc ;
-        sudo pacman-optimize ;
-        bleachbit -c --preset ;
-        sudo bleachbit -c --preset
-}
-
-# Zalando
-alias pipzalando="sudo pip install --upgrade --extra-index-url http://repo.zalando/pypi"
-alias windows="rdesktop -g 1915x1020 -a 32 -u 'corp\skoenig-d' z-wnmgmt01.corp.ad.zalando.net"
-alias ldaplastnumber="ldapsearch -h auth01.zalando -Y GSSAPI -b dc=zalando,dc=net -s sub '(objectClass=posixAccount)' uidNumber | grep uidNumber | sort -n -k 2"
-alias ldapsearchz="ldapsearch -h auth01.zalando -Y GSSAPI -b dc=zalando,dc=net"
-alias ldapviz="ldapvi -h auth01.zalando -Y GSSAPI --bind sasl"
-
 # mpc aliases
 alias mpc='mpc --format "%position% %artist%\t\t%album%\t\t%track%. %title%" '
 mpc_save () {
-	mpc save $(date +%F_%H-%M)
+    mpc save $(date +%F_%H-%M)
 }
+
 mpc_addsong  () {
-	mpc search any "$*" | mpc add
- }
+    mpc search any "$*" | mpc add
+}
+
 mpc_addrandom () {
-	mpc listall | sed -n $[RANDOM % $(mpc stats | grep Songs | awk '{print $2}')+1]p | mpc add
- }
+    mpc listall | sed -n $[RANDOM % $(mpc stats | grep Songs | awk '{print $2}')+1]p | mpc add
+}
+
 mpc_jump () {
-	 mpc playlist | grep -i "$*" | grep -o '^[0-9]\+' | head -1 | xargs mpc play
- }
-asc () {
-    ssh -t "$@" 'screen -DRU'
+    mpc playlist | grep -i "$*" | grep -o '^[0-9]\+' | head -1 | xargs mpc play
 }
 
 pullrequest () {
     git push origin HEAD
     hub pull-request -o -m $(git rev-parse --abbrev-ref HEAD)
 }
+
 commitagain () {
     git commit -c `git log -1 --format=%H "$@"` "$@"
+}
+
+asc () {
+    ssh -t "$@" 'screen -DRU'
 }
 
 svg2eps () {
@@ -179,7 +157,6 @@ svg2eps () {
         inkscape --without-gui --file="${file}" --export-eps="${file/svg/eps}" --export-dpi=300 --export-ignore-filters --export-ps-level=3
     done
 }
-
 
 cheat.sh () {
     curl -m 3 "http://cheat.sh/$1";
@@ -197,7 +174,6 @@ else
 fi
 sed -i "s|last_colorset=.*\$|last_colorset=$background|" ~/.config/sakura/sakura.conf
 
-
 if [ -r /usr/share/bash-completion/bash_completion ]
 then
     source /usr/share/bash-completion/bash_completion
@@ -211,6 +187,5 @@ if [ -f '/home/skoenig/bin/google-cloud-sdk/path.bash.inc' ]; then . '/home/skoe
 # The next line enables shell command completion for gcloud.
 if [ -f '/home/skoenig/bin/google-cloud-sdk/completion.bash.inc' ]; then . '/home/skoenig/bin/google-cloud-sdk/completion.bash.inc'; fi
 
-command -v "zkubectl" &>/dev/null && source <(zkubectl completion bash)
-
-
+# kubectl sugar
+command -v "kubectl" &>/dev/null && source <(kubectl completion bash)
