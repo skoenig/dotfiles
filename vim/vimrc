@@ -95,7 +95,7 @@ set t_Co=256
 
 " Switch colorscheme depending on the time of the day.
 let hour = strftime("%H")
-if 8 <= hour && hour <= 19
+if 8 <= hour && hour <= 15
   " set background=light
   colorscheme onehalflight
 else
