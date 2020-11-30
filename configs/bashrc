@@ -166,7 +166,7 @@ gch () { git checkout "$(git branch --all | fzf | tr -d '[:space:]')"; }
 
 # Switch colorscheme depending on the time of the day.
 hour=$(date +%H)
-if [[ $hour -ge 8 && $hour -le 15 ]]
+if [[ ${hour#0} -ge 8 && ${hour#0} -le 15 ]]
 then
   background=2
 else
