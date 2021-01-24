@@ -7,13 +7,16 @@ wmname LG3D
 hsetroot -solid "#333333" &
 
 ## Start background services
-~/.dropbox-dist/dropboxd &
 redshift-gtk &
 nm-applet &
 
-if [[ -f /etc/debian_version && -f $HOME/.config/awesome/rc-debian.lua ]]
+if [[ -f $HOME/.config/awesome/rc-debian.lua ]]
 then
     config="--config $HOME/.config/awesome/rc-debian.lua"
+fi
+
+if [[ -f /etc/debian_version ]]
+then
     version=$(awk -F . '{print $1}' /etc/debian_version)
     if [[ -f "$HOME/.config/awesome/rc-debian-${version}.lua" ]]
     then

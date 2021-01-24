@@ -38,8 +38,6 @@ complete -cf sudo
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
-export TERM=rxvt-unicode
-
 color_bash () {
     local NONE="\[\033[0m\]"
 
@@ -77,14 +75,14 @@ color_bash () {
     local host=$(hostname -s)
     case $host in
         "moobar") color=$O ;;
-        "bender") color=$R ;;
+        "bender") color=$EMY ;;
         "zalbo")  color=$EMB ;;
         "hack")   color=$EMK ;;
         "rpi")    color=$EMG ;;
         *)        color=$EMC ;;
     esac
 
-    export PS1="${debian_chroot:+($debian_chroot)}${O}\u${NONE}@${color}\h${NONE} \W${O}$ ${NONE}"
+    export PS1="${debian_chroot:+($debian_chroot)}${O}\u${NONE}@${color}\h${NONE} \W${O}$ ${NONE}\$(git branch 2> /dev/null | grep '^*' | colrm 1 2 | xargs -I BRANCH echo -n \"${EMM}(BRANCH)${NONE} \")"
 }
 
 if which tput > /dev/null 2>&1 && [[ $(tput -T$TERM colors) -ge 8 ]]
@@ -118,7 +116,11 @@ alias more=less
 alias free='free -m'
 alias findbigfiles="find . -type f -printf '%s\t\"%p\"\n' | sort -n"
 alias emacs='emacs -nw'
+alias kazam='kazam --nosound'
+alias abook="abook --datafile /home/skoenig/workspace/scripts/configs/mail/addressbook"
+alias mplay="sudo mplayer -vo fbdev2 -xy 1280 -zoom -fs "
 alias password="apg -n 1 -a 0 -m 15 -x 15"
+alias pycharm='wmname LG3D; /usr/local/bin/pycharm'
 alias translate="grep -hwi /usr/share/dict/de-en.txt /usr/share/trans/de-en -e"
 alias trash='trash-put'
 alias wakehack='wakeonlan 00:23:54:2f:2e:a5'
