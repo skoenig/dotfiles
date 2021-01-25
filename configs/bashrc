@@ -38,8 +38,6 @@ complete -cf sudo
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
-export TERM=rxvt-unicode
-
 color_bash () {
     local NONE="\[\033[0m\]"
 
