@@ -255,7 +255,7 @@ local  white                 = "#ffffff"
 theme = beautiful.get()
 theme.font          = "monospace 10"
 theme.border_width  = "2"
-theme.border_focus  = "#fabd2f"
+theme.border_focus  = "#b8bb26"
 -- }}}
 
 -- {{{ Menu
