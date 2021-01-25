@@ -1,4 +1,4 @@
--- *created Tuesday, 10. December 2013 - updated Sunday, 21. June 2020*
+-- *created Tuesday, 10. December 2013 - updated Monday, 25. January 2021*
 -- If LuaRocks is installed, make sure that packages installed through it are
 -- found (e.g. lgi). If LuaRocks is not installed, do nothing.
 pcall(require, "luarocks.loader")
@@ -253,9 +253,9 @@ local  white                 = "#ffffff"
 -- overrides
 
 theme = beautiful.get()
-theme.font          = "monospace 9"
+theme.font          = "monospace 10"
 theme.border_width  = "2"
-theme.border_focus  = darkorange
+theme.border_focus  = "#fabd2f"
 -- }}}
 
 -- {{{ Menu
