@@ -18,12 +18,11 @@ Plug 'joedicastro/vim-molokai256'
 Plug 'chriskempson/vim-tomorrow-theme'
 Plug 'chriskempson/base16-vim'
 Plug 'NLKNguyen/papercolor-theme'
-Plug 'junegunn/seoul256.vim'
-Plug 'jnurmine/zenburn'
 Plug 'jonathanfilip/vim-lucius'
-Plug 'dfrnswrth/vim-codeburn'
-Plug 'notpratheek/vim-luna'
-Plug 'sonph/onehalf', {'rtp': 'vim/'}
+Plug 'jnurmine/zenburn'
+Plug 'morhetz/gruvbox'
+Plug 'mhartington/oceanic-next'
+Plug 'drewtempelmeyer/palenight.vim'
 
 " Everything else...
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
@@ -90,17 +89,23 @@ endif
 " Make Y consistent with C and D.  See :help Y.
 nnoremap Y y$
 
-set t_Co=256
-" colorscheme PaperColor
+if exists('+termguicolors')
+  set termguicolors
+else
+  set t_Co=256
+endif
 
 " Switch colorscheme depending on the time of the day.
 let hour = strftime("%H")
 if 8 <= hour && hour <= 15
-  " set background=light
-  colorscheme onehalflight
+  set background=light
+  let g:gruvbox_contrast_light='hard'
+  colorscheme gruvbox
+
 else
-  " set background=dark
-  colorscheme onehalfdark
+  set background=dark
+  colorscheme gruvbox
+
 endif
 
 " set guifont
@@ -307,7 +312,7 @@ function! LastModified()
   if &modified
     let save_cursor = getpos(".")
     let n = min([3, line("$")])
-    keepjumps exe '1,' . n . 's#^\(.*updated\)[^*]*#\1 ' .
+    keepjumps exe '2,' . n . 's#^\(.*updated\)[^*]*#\1 ' .
           \ strftime('%A, %d. %B %Y', localtime()) . '#e'
     call histdel('search', -1)
     call setpos('.', save_cursor)
