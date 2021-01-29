@@ -10,11 +10,13 @@ hsetroot -solid "#333333" &
 redshift-gtk &
 nm-applet &
 
-if [[ -f $HOME/.config/awesome/rc-debian.lua ]]
+# set default rc.lua as fallback (should be symlink to the most recent config)
+if [[ -f $HOME/.config/awesome/rc.lua ]]
 then
-    config="--config $HOME/.config/awesome/rc-debian.lua"
+    config="--config $HOME/.config/awesome/rc.lua"
 fi
 
+# detect Debian version specific configs, mostly for downward-compatibility
 if [[ -f /etc/debian_version ]]
 then
     version=$(awk -F . '{print $1}' /etc/debian_version)
