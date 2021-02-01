@@ -1,45 +1,9 @@
-[submodule "bundle/nerdtree"]
-    path = bundle/nerdtree
-    url = https://github.com/scrooloose/nerdtree.git
-[submodule "bundle/fugitive"]
-    path = bundle/fugitive
-    url = git://github.com/tpope/vim-fugitive.git
-[submodule "bundle/gnupg"]
-    path = bundle/gnupg
-    url = git://gitorious.org/vim-gnupg/vim-gnupg.git
-[submodule "bundle/buftabs"]
-    path = bundle/buftabs
-    url = https://github.com/vim-scripts/buftabs.git
-[submodule "bundle/sensible"]
-    path = bundle/sensible
-    url = https://github.com/tpope/vim-sensible.git
-[submodule "bundle/snipmate"]
-    path = bundle/snipmate
-    url = https://github.com/msanders/snipmate.vim.git
-[submodule "bundle/ack"]
-    path = bundle/ack
-    url = https://github.com/mileszs/ack.vim.git
-[submodule "bundle/taskpaper"]
-    path = bundle/taskpaper
-    url = git://github.com/davidoc/taskpaper.vim.git
-[submodule "bundle/todo.txt"]
-    path = bundle/todo.txt
-    url = git://github.com/freitass/todo.txt-vim.git
-[submodule "bundle/ctrlp"]
-    path = bundle/ctrlp
-    url = https://github.com/kien/ctrlp.vim
-[submodule "bundle/jedi-vim"]
-    path = bundle/jedi-vim
-    url = https://github.com/davidhalter/jedi-vim
-[submodule "bundle/syntastic"]
-    path = bundle/syntastic
-    url = https://github.com/scrooloose/syntastic.git
-[submodule "bundle/puppet"]
-    path = bundle/puppet
-    url = git://github.com/rodjek/vim-puppet.git
-[submodule "bundle/tabular"]
-    path = bundle/tabular
-    url = git://github.com/godlygeek/tabular.git
-[submodule "bundle/vimwiki"]
-    path = bundle/vimwiki
-    url = https://github.com/vimwiki/vimwiki.git
+[submodule "awesome/themes"]
+	path = awesome/themes
+	url = https://github.com/serialoverflow/awesome-themes.git
+[submodule "awesome/lain"]
+	path = awesome/lain
+	url = https://github.com/lcpz/lain.git
+[submodule "awesome/freedesktop"]
+	path = awesome/freedesktop
+	url = https://github.com/lcpz/awesome-freedesktop.git
