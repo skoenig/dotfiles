@@ -161,7 +161,7 @@ commitagain () {
 # shellcheck disable=SC2015,SC2164
 fcd () { [ -f "$1" ] && { cd "$(dirname "$1")"; } || { cd "$1"; }; pwd; }
 
-gch () { git checkout "$(git branch --all | fzf | tr -d '[:space:]')"; }
+gch () { git checkout "$(git branch --all | fzf | tr -d '[:space:]' | sed 's|remotes/origin/||' )"; }
 
 asc () {
     ssh -t "$@" 'screen -DRU'
