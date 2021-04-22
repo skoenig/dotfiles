@@ -194,7 +194,7 @@ shirts () {
 
 # Switch colorscheme depending on the time of the day.
 hour=$(date +%H)
-if [[ ${hour#0} -ge 8 && ${hour#0} -le 15 ]]
+if [[ ${hour#0} -ge 8 && ${hour#0} -le 20 ]]
 then
   background=2
 else

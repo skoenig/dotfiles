@@ -97,7 +97,7 @@ endif
 
 " Switch colorscheme depending on the time of the day.
 let hour = strftime("%H")
-if 8 <= hour && hour <= 15
+if 8 <= hour && hour <= 20
   set background=light
   let g:gruvbox_contrast_light='hard'
   colorscheme gruvbox
