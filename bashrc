@@ -226,9 +226,6 @@ command -v "kubectl" &>/dev/null && source <(kubectl completion bash)
 alias k='/usr/local/bin/kubectl '
 complete -F __start_kubectl k
 
-# kubectx and kubens
-export PATH=~/.kubectx:$PATH
-
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

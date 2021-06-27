@@ -9,8 +9,12 @@
 #umask 022
 
 PATH="/usr/bin/core_perl:$PATH"
-PATH="/usr/local/go/bin:$PATH"
 PATH="/usr/local/bin/node-v12.13.0-linux-x64/bin:$PATH"
+PATH="$HOME/.kubectx:$PATH"
+PATH="/usr/local/go/bin:$PATH"
+GOPATH=$HOME/workspace/go
+GOBIN=$GOPATH/bin
+PATH="${GOBIN}:${PATH}"
 
 # if running bash
 if [ -n "$BASH_VERSION" ]; then
@@ -30,9 +34,6 @@ if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
 
-GOPATH=$HOME/workspace/go
-GOBIN=$GOPATH/bin
-PATH="${GOBIN}:${PATH}"
 EDITOR=/usr/bin/vim
 BROWSER=firefox
 JAVA_HOME=$(readlink -f /usr/bin/java | sed "s:bin/java::")
