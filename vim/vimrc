@@ -179,7 +179,7 @@ set diffopt+=iwhite
 set pastetoggle=<F2>
 
 " toggle line numbers
-nnoremap <F3> :set nonumber!<CR>
+nnoremap <F3> :set nonumber! \| set norelativenumber!<CR>
 
 " toggle cursorline highlighting
 nnoremap <F4> :set nocursorline!<CR>
