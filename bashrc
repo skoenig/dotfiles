@@ -148,8 +148,8 @@ cheat.sh () {
     curl -m 3 "http://cheat.sh/$1";
 }
 
+# uses https://github.com/cli/cli
 pullrequest () {
-    #hub pull-request -o -m $(git rev-parse --abbrev-ref HEAD)
     git push -u origin HEAD
     gh pr create --fill --web
 }
@@ -161,6 +161,7 @@ commitagain () {
 # shellcheck disable=SC2015,SC2164
 fcd () { [ -f "$1" ] && { cd "$(dirname "$1")"; } || { cd "$1"; }; pwd; }
 
+# uses https://github.com/junegunn/fzf
 gch () { git checkout "$(git branch --all | fzf | tr -d '[:space:]' | sed 's|remotes/origin/||' )"; }
 
 asc () {
