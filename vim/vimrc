@@ -28,7 +28,6 @@ Plug 'drewtempelmeyer/palenight.vim'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'vim-airline/vim-airline'
 Plug 'freitass/todo.txt-vim'
-Plug 'j5shi/searchcomplete'
 Plug 'junegunn/limelight.vim'
 Plug 'kien/ctrlp.vim'
 Plug 'mileszs/ack.vim'
@@ -39,7 +38,6 @@ Plug 'psf/black', { 'branch': 'stable' }    " Python autoformat
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-eunuch'
 Plug 'plasticboy/vim-markdown', { 'for': 'markdown', 'commit': '3fcde7215e22913f004c2836fd46ff61746be6db' }
-Plug 'rodjek/vim-puppet'
 Plug 'vim-scripts/buftabs'
 Plug 'godlygeek/tabular'
 Plug 'vimwiki/vimwiki'
@@ -324,7 +322,6 @@ autocmd BufWritePre * call LastModified()
 au BufNewFile,BufRead *.markdown,*.mdown,*.mkd,*.mkdn,*.md set ft=markdown wrap
 au BufNewFile,BufRead *.jinja set ft=jinja
 au BufNewFile,BufRead todo.txt,done.txt set filetype=todo
-au BufNewFile,BufRead *.pp set filetype=puppet
 au BufNewFile,BufRead *.sls,*.yml,*.yaml set filetype=yaml ts=2 sw=2 sts=2 et
 
 " airline
