@@ -144,9 +144,7 @@ set shiftwidth=4      " amout of spaces < and > uses
 set softtabstop=4
 set tabstop=4         " spaces to set tabwidth to
 set expandtab         " convert tabs to spaces
-set foldmethod=marker " automatically fold by marker {{{ }}}
-set foldenable        " all folds closed by default
-set foldclose=all     " automatically close fold when not in it
+set foldlevelstart=1
 set textwidth=0       " textwidth used by used for wrapping
 set formatoptions+=t  " automatic wrapping
 set autoindent
