@@ -287,8 +287,6 @@ let g:vimwiki_use_calendar = 1
 let g:vimwiki_folding = 'expr'
 let g:vimwiki_global_ext = 0
 let g:vimwiki_listsyms = ' ○◐●✓'
-nmap <Leader>wcr <Plug>VimwikiDiaryGenerateLinks
-nmap <Leader>wc <Plug>Vimwiki2HTML
 nmap <Leader><Up> <Plug>VimwikiDiaryPrevDay
 nmap <Leader><Down> <Plug>VimwikiDiaryNextDay
 
