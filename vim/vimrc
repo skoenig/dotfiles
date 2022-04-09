@@ -27,7 +27,6 @@ Plug 'drewtempelmeyer/palenight.vim'
 " Everything else...
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'vim-airline/vim-airline'
-Plug 'freitass/todo.txt-vim'
 Plug 'junegunn/limelight.vim'
 Plug 'kien/ctrlp.vim'
 Plug 'mileszs/ack.vim'
@@ -286,7 +285,8 @@ let g:vimwiki_list = [{ 'path': '~/Sync/wiki/',
 let g:vimwiki_use_calendar = 1
 let g:vimwiki_folding = 'expr'
 let g:vimwiki_global_ext = 0
-let g:vimwiki_listsyms = ' ○◐●✓'
+let g:vimwiki_hl_cb_checked = 2
+nmap <Leader>tt :e ~/Sync/wiki/todo/todo.md<CR>
 nmap <Leader><Up> <Plug>VimwikiDiaryPrevDay
 nmap <Leader><Down> <Plug>VimwikiDiaryNextDay
 
@@ -322,7 +322,6 @@ autocmd BufWritePre * call LastModified()
 " filetype detection
 au BufNewFile,BufRead *.markdown,*.mdown,*.mkd,*.mkdn,*.md set ft=markdown wrap
 au BufNewFile,BufRead *.jinja set ft=jinja
-au BufNewFile,BufRead todo.txt,done.txt set filetype=todo
 au BufNewFile,BufRead *.sls,*.yml,*.yaml set filetype=yaml ts=2 sw=2 sts=2 et
 
 " airline
