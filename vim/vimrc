@@ -327,13 +327,3 @@ au BufNewFile,BufRead *.sls,*.yml,*.yaml set filetype=yaml ts=2 sw=2 sts=2 et
 " airline
 let g:airline_powerline_fonts = 1
 
-"--- .../plugins/named.vim ----
-function! UPDSERIAL(date, num)
-if (strftime("%Y%m%d") == a:date)
-return a:date . a:num+1
-endif
-return strftime("%Y%m%d") . '01'
-endfunction
-
-command! Soa :%s/\(2[0-9]\{7}\)\([0-9]\{2}\)\(\s*;\s*Serial\)/\=UPDSERIAL(submatch(1), submatch(2)) . submatch(3)/gci
-"---- eof ---------------------
