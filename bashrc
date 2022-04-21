@@ -224,7 +224,7 @@ if [ -f '/home/skoenig/bin/google-cloud-sdk/completion.bash.inc' ]; then . '/hom
 
 # kubectl sugar
 command -v "kubectl" &>/dev/null && source <(kubectl completion bash)
-alias k='/usr/local/bin/kubectl '
+alias k='kubectl '
 complete -F __start_kubectl k
 
 export NVM_DIR="$HOME/.nvm"
