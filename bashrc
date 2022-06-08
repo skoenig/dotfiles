@@ -75,14 +75,14 @@ color_bash () {
     local host=$(hostname -s)
     case $host in
         "moobar") color=$O ;;
-        "bender") color=$R ;;
+        "bender") color=$EMY ;;
         "zalbo")  color=$EMB ;;
         "hack")   color=$EMK ;;
         "rpi")    color=$EMG ;;
         *)        color=$EMC ;;
     esac
 
-    export PS1="${debian_chroot:+($debian_chroot)}${O}\u${NONE}@${color}\h${NONE} \W${O}$ ${NONE}\$(git branch 2> /dev/null | grep '^*' | colrm 1 2 | xargs -I BRANCH echo -n \"${EMM}(BRANCH)${NONE} \")"
+    export PS1="${debian_chroot:+($debian_chroot)}${O}\u${NONE}@${color}\h${NONE} \W${O} ${NONE}\$(git branch 2> /dev/null | grep '^*' | colrm 1 2 | xargs -I BRANCH echo -n \"${EMM}(BRANCH)${NONE} \")$ "
 }
 
 if which tput > /dev/null 2>&1 && [[ $(tput -T$TERM colors) -ge 8 ]]
