@@ -29,7 +29,7 @@ Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'vim-airline/vim-airline'
 Plug 'junegunn/limelight.vim'
 Plug 'kien/ctrlp.vim'
-Plug 'mileszs/ack.vim'
+Plug 'jremmen/vim-ripgrep'
 Plug 'msanders/snipmate.vim'
 Plug 'jamessan/vim-gnupg'
 Plug 'vim-syntastic/syntastic'              " Syntax checker + pep8
@@ -226,8 +226,8 @@ set statusline+=%*
 " NERDTree
 map <leader>n :NERDTreeToggle<CR>
 
-" ACK
-map <leader>a :Ack
+" Ripgrep
+map <leader>r :Rg<Space>
 
 " ctrl-p
 let g:ctrlp_map = '<leader>p'
