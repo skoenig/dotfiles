@@ -158,6 +158,10 @@ commitagain () {
     git commit -c `git log -1 --format=%H "$@"` "$@"
 }
 
+shortsha () {
+    git rev-parse --short HEAD
+}
+
 # shellcheck disable=SC2015,SC2164
 fcd () { [ -f "$1" ] && { cd "$(dirname "$1")"; } || { cd "$1"; }; pwd; }
 
