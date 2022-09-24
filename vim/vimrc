@@ -285,6 +285,7 @@ let g:vimwiki_hl_cb_checked = 2
 let g:vimwiki_markdown_link_ext = 1
 let g:vimwiki_dir_link = 'index'
 let g:vimwiki_auto_header = 1
+let g:vimwiki_listsyms = ' .oOx'
 nmap <Leader>tt :e ~/Sync/wiki/todo/todo.md<CR>
 nmap <Leader><Up> <Plug>VimwikiDiaryPrevDay
 nmap <Leader><Down> <Plug>VimwikiDiaryNextDay
