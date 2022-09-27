@@ -247,6 +247,8 @@ let g:syntastic_check_on_wq = 0
 let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
 let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
 let g:syntastic_python_checkers = ['flake8']
+let g:syntastic_markdown_mdl_exec = "markdownlint"
+let g:syntastic_markdown_mdl_args = ""
 
 function! FindConfig(prefix, what, where)
     let cfg = findfile(a:what, escape(a:where, ' ') . ';')
