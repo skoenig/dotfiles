@@ -136,8 +136,6 @@ set ruler             " show the cursor position all the time
 set showcmd           " display incomplete commands
 set showmode          " show Insert, Replace or Visual mode in the last line
 set ttyfast           " fast scrolling
-set writebackup       " make a backup before changing a file
-set backup            " keep backup files
 set shiftwidth=4      " amout of spaces < and > uses
 set softtabstop=4
 set tabstop=4         " spaces to set tabwidth to
@@ -167,6 +165,10 @@ set novisualbell
 set colorcolumn=80
 set scrolloff=10
 set sidescrolloff=10
+set backup            " keep backup files
+set backupdir=~/.cache//
+set directory=~/.cache//
+set undodir=~/.cache//
 set diffopt+=iwhite
 
 " toggle copy & paste mode
