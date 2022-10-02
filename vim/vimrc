@@ -30,7 +30,6 @@ Plug 'vim-airline/vim-airline'
 Plug 'junegunn/limelight.vim'
 Plug 'kien/ctrlp.vim'
 Plug 'jremmen/vim-ripgrep'
-Plug 'msanders/snipmate.vim'
 Plug 'jamessan/vim-gnupg'
 Plug 'vim-syntastic/syntastic'              " Syntax checker + pep8
 Plug 'psf/black', { 'branch': 'stable' }    " Python autoformat
