@@ -106,6 +106,7 @@ if [ -x /usr/bin/dircolors ]; then
     alias egrep='egrep --color=auto'
 fi
 
+alias rg='rg --unrestricted --smart-case'
 alias l='ls -1'
 alias ll='ls -l'
 alias cp="cp -i"
