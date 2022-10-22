@@ -319,7 +319,7 @@ function! LastModified()
     call setpos('.', save_cursor)
   endif
 endfun
-autocmd BufWritePre * call LastModified()
+autocmd BufWritePre *.markdown,*.mdown,*.mkd,*.mkdn,*.md call LastModified()
 
 " filetype detection
 au BufNewFile,BufRead *.markdown,*.mdown,*.mkd,*.mkdn,*.md set ft=markdown wrap
