@@ -299,7 +299,7 @@ nmap <Leader><Down> <Plug>VimwikiDiaryNextDay
     let title = substitute(join(split(expand("%:t:r"),"-")), "\\<.",  "\\u&", "g")
     exec "normal! I# " . title
     put=''
-    put='*created ' . date . ' - updated ' . date . '*'
+    put='> created ' . date . ' - updated ' . date
     exec "normal! o\<CR>"
  endfunction
 
