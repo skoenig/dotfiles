@@ -8,7 +8,6 @@
 # for ssh logins, install and configure the libpam-umask package.
 #umask 022
 
-PATH="/usr/local/bin/node-v12.13.0-linux-x64/bin:$PATH"
 PATH="$HOME/.kubectx:$PATH"
 PATH="/usr/local/go/bin:$PATH"
 GOPATH="$HOME/workspace/go"
