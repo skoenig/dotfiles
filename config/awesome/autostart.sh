@@ -1,4 +1,5 @@
 #!/bin/bash
+# shellcheck disable=SC2086
 
 # mimic a non-reparenting window manager for Java applications
 wmname LG3D
@@ -26,4 +27,4 @@ then
     config="--config $HOME/.config/awesome/rc.lua"
 fi
 
-exec awesome $config >> ~/.cache/awesome/stdout 2>> ~/.cache/awesome/stderr
+exec awesome $config >> "$HOME/.cache/awesome/stdout" 2>> "$HOME/.cache/awesome/stderr"
