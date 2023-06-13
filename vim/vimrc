@@ -48,6 +48,14 @@ call plug#end()
 " remove trailing whitespaces
 autocmd BufWritePre * %s/\s\+$//e
 
+" remove trailing empty lines
+function TrimEndLines()
+    let save_cursor = getpos(".")
+    silent! %s#\($\n\s*\)\+\%$##
+    call setpos('.', save_cursor)
+endfunction
+autocmd BufWritePre * call TrimEndLines()
+
 " Enable syntax highlighting
 if has('syntax') && !exists('g:syntax_on')
   syntax enable
