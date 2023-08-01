@@ -232,13 +232,4 @@ command -v "kubectl" &>/dev/null && source <(kubectl completion bash)
 alias k='kubectl '
 complete -F __start_kubectl k
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"                    # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && source "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-export PATH="$HOME/.pyenv/bin:$PATH"
-export PATH="$PYENV_ROOT/bin:$PATH"
-
-if command -v pyenv 1>/dev/null 2>&1; then
-  eval "$(pyenv init -)"
-fi
+[ -f "${HOME}/.bash_local" ] && source "${HOME}/.bash_local"
