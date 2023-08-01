@@ -9,10 +9,9 @@
 #umask 022
 
 PATH="$HOME/.kubectx:$PATH"
-PATH="/usr/local/go/bin:$PATH"
-GOPATH="$HOME/workspace/go"
-GOBIN="$GOPATH/bin"
-PATH="${GOBIN}:${PATH}"
+export PATH="$PATH:/usr/local/go/bin"
+export PATH=$PATH:$(go env GOPATH)/bin
+export GOPATH=$(go env GOPATH)
 
 # if running bash
 if [ -n "$BASH_VERSION" ]; then
@@ -40,7 +39,7 @@ PANEL_FIFO="/tmp/panel-fifo"
 PANEL_HEIGHT=30
 PANEL_FONT_FAMILY="*DejaVu-Sans-Mono for Powerline*"
 SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
-export PATH GOPATH GOBIN EDITOR BROWSER JAVA_HOME JAVA_FONTS PANEL_FIFO PANEL_HEIGHT PANEL_FONT_FAMILY SSL_CERT_FILE
+export PATH EDITOR BROWSER JAVA_HOME JAVA_FONTS PANEL_FIFO PANEL_HEIGHT PANEL_FONT_FAMILY SSL_CERT_FILE
 
 # Termcap is outdated, old, and crusty, kill it.
 unset TERMCAP
