@@ -1,6 +1,4 @@
 # ~/.bashrc: executed by bash(1) for non-login shells.
-# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
-# for examples
 
 # If not running interactively, don't do anything
 case $- in
@@ -208,9 +206,8 @@ else
 fi
 sed -i "s|last_colorset=.*\$|last_colorset=$background|" ~/.config/sakura/sakura.conf
 
-# enable programmable completion features (you don't need to enable
-# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
-# sources /etc/bash.bashrc).
+[ -x /usr/bin/xmodmap ] && [ -f ~/.Xmodmap ] && [ ${#DISPLAY} -ne 0 ] && /usr/bin/xmodmap ~/.Xmodmap
+
 if ! shopt -oq posix; then
   if [ -f /usr/share/bash-completion/bash_completion ]; then
     . /usr/share/bash-completion/bash_completion
@@ -218,8 +215,6 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
-
-[ -x /usr/bin/xmodmap ] && [ -f ~/.Xmodmap ] && [ ${#DISPLAY} -ne 0 ] && /usr/bin/xmodmap ~/.Xmodmap
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/home/skoenig/bin/google-cloud-sdk/path.bash.inc' ]; then . '/home/skoenig/bin/google-cloud-sdk/path.bash.inc'; fi
