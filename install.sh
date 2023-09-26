@@ -29,6 +29,7 @@ function link_dotfile {
 link_dotfile config/awesome
 link_dotfile config/spectrwm
 link_dotfile config/markdownlint
+link_dotfile config/systemd/user/geoclue-agent.service
 link_dotfile bashrc
 link_dotfile gitconfig
 link_dotfile gitignore
