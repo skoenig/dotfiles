@@ -90,8 +90,9 @@ if !exists('g:netrw_list_hide')
   let g:netrw_list_hide = '^\.,\~$,^tags$'
 endif
 
-" Make Y consistent with C and D.  See :help Y.
-nnoremap Y y$
+nnoremap Y "+y
+vnoremap Y "+y
+nnoremap YY ggVG"+y
 
 if exists('+termguicolors')
   set termguicolors
