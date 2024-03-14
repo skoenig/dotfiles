@@ -1,11 +1,11 @@
 # ~/.profile: executed by the command interpreter for login shells.
-# This file is not read by bash(1), if ~/.bash_profile or ~/.bash_login
-# exists.
+# This file is not read by bash(1), if ~/.bash_profile or ~/.bash_login exists.
 
 PATH="$HOME/.kubectx:$PATH"
-export PATH="$PATH:/usr/local/go/bin"
-export PATH=$PATH:$(go env GOPATH)/bin
-export GOPATH=$(go env GOPATH)
+if [ -d /usr/local/go/ ]; then
+    export PATH="$PATH:/usr/local/go/bin"
+    export PATH=$PATH:$(go env GOPATH)/bin
+fi
 
 # if running bash
 if [ -n "$BASH_VERSION" ]; then
