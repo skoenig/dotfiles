@@ -122,7 +122,7 @@ alias wakehack='wakeonlan 00:23:54:2f:2e:a5'
 alias bat='upower -i /org/freedesktop/UPower/devices/battery_BAT1 | grep -E "state|time\ to|percentage"'
 alias feh='feh --force-aliasing --scale-down '
 alias sakura='sakura --working-directory ~/.config/sakura'
-alias dockerclean="docker images | awk '/^<none>/ {print \$3}' | xargs -r docker rmi"
+alias dockerclean="docker system prune -f"
 alias whatthecommit="curl -s http://whatthecommit.com/index.txt"
 
 # mpc aliases
