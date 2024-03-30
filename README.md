@@ -3,7 +3,7 @@
 <p align="center">
   <img src="https://github.com/skoenig/dotfiles/blob/main/icon.png?raw=true" alt="dotfiles logo"/>
   <br />
-  soekoe's dotfiles for feeling at home everywhere
+  <i>Crafting a digital home, one dotfile at a time.</i>
 </p>
 
 This dotfiles repo contains configurations and customizations for bash, awesome, vim, git and some other tools I use frequently for my very own needs. YMMV.
@@ -18,3 +18,9 @@ cd ~/.dotfiles
 
 This will symlink the appropriate files in `~/.dotfiles` to your home directory.
 
+After this, initilize the submodules that contain awesomewm extras:
+
+```sh
+git submodule init
+gut submodule update
+```
