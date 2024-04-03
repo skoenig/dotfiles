@@ -143,10 +143,6 @@ mpc_jump () {
     mpc playlist | grep -i "$*" | grep -o '^[0-9]\+' | head -1 | xargs mpc play
 }
 
-cheat.sh () {
-    curl -m 3 "http://cheat.sh/$1";
-}
-
 # uses https://github.com/cli/cli
 pullrequest () {
     git push -u origin HEAD
