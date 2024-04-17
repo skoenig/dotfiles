@@ -20,13 +20,6 @@ setxkbmap us
 ## have default mouse cursor theme at least in root window
 xsetroot -cursor_name left_ptr &
 
-## Detect and configure touchpad. See 'man synclient' for more info.
-if  grep -Eiq 'synaptics' /proc/bus/input/devices
-then
-    synclient VertEdgeScroll=1 &
-    synclient TapButton1=0 &
-fi
-
 [ -f ~/.Xmodmap ] && /usr/bin/xmodmap ~/.Xmodmap
 [ -f ~/.Xresources ] && xrdb -merge ~/.Xresources
 

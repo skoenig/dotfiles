@@ -337,10 +337,3 @@ au BufNewFile,BufRead *.sls,*.yml,*.yaml set filetype=yaml ts=2 sw=2 sts=2 et
 
 " airline
 let g:airline_powerline_fonts = 1
-
-" disable touchpad scrolling
-augroup scroll
-    au!
-    au  VimEnter * :silent !synclient VertEdgeScroll=0 VertTwoFingerScroll=0
-    au  VimLeave * :silent !synclient VertEdgeScroll=1 VertTwoFingerScroll=1
-augroup end
