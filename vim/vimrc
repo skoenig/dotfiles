@@ -257,8 +257,6 @@ let g:syntastic_check_on_wq = 0
 let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
 let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
 let g:syntastic_python_checkers = ['flake8']
-let g:syntastic_markdown_mdl_exec = "markdownlint"
-let g:syntastic_markdown_mdl_args = ""
 
 function! FindConfig(prefix, what, where)
     let cfg = findfile(a:what, escape(a:where, ' ') . ';')
@@ -328,12 +326,11 @@ function! LastModified()
     call setpos('.', save_cursor)
   endif
 endfun
-autocmd BufWritePre *.markdown,*.mdown,*.mkd,*.mkdn,*.md call LastModified()
+autocmd BufWritePre *.{md,mdx,mdown,mkd,mkdn,markdown,mdwn} call LastModified()
 
 " filetype detection
-au BufNewFile,BufRead *.markdown,*.mdown,*.mkd,*.mkdn,*.md set ft=markdown wrap
-au BufNewFile,BufRead *.jinja set ft=jinja
-au BufNewFile,BufRead *.sls,*.yml,*.yaml set filetype=yaml ts=2 sw=2 sts=2 et
+au BufNewFile,BufRead *.yml,*.yaml setlocal filetype=yaml ts=2 sw=2 sts=2 et
+au BufRead,BufWinEnter,BufNewFile *.{md,mdx,mdown,mkd,mkdn,markdown,mdwn} setlocal filetype=markdown syntax=markdown wrap
 
 " airline
 let g:airline_powerline_fonts = 1

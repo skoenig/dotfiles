@@ -2,7 +2,7 @@
   "default": true,
   "no-bare-urls": false,
   "blanks-around-lists": false,
-  "blanks-around-headers": {
+  "blanks-around-headings": {
     "lines_above": 1,
     "lines_below": 0
   },
@@ -15,5 +15,8 @@
   },
   "line-length": {
     "line_length": 1000
+  },
+    "no-duplicate-heading": {
+    "siblings_only": true
   }
 }
