@@ -26,7 +26,6 @@ if [ -d "$HOME/.local/bin" ] ; then
 fi
 
 EDITOR=/usr/bin/vim
-BROWSER=firefox
 JAVA_HOME=$(readlink -f /usr/bin/java | sed "s:bin/java::")
 JAVA_FONTS=/usr/share/fonts/TTF
 PANEL_FIFO="/tmp/panel-fifo"
