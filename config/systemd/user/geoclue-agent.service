@@ -1,5 +1,6 @@
 [Unit]
 Description=redshift needs to get a (geo)clue
+After=network.target
 
 [Service]
 ExecStart=/usr/libexec/geoclue-2.0/demos/agent
