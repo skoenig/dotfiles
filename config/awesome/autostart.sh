@@ -10,6 +10,7 @@ hsetroot -solid "#333333" &
 ## Start background services
 redshift-gtk &
 nm-applet &
+cbatticon --critical-level 15 --command-critical-level "sudo pm-suspend" &
 
 # detect distribution & version specific configs, mostly for backward-compatibility
 if [[ -r /etc/os-release ]]

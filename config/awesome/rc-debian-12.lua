@@ -5,11 +5,9 @@ pcall(require, "luarocks.loader")
 local gears = require("gears")
 local awful = require("awful")
 require("awful.autofocus")
-local battery = require("obvious.battery")
 local wibox = require("wibox")
 local beautiful = require("beautiful")
 local naughty = require("naughty")
-local lain = require("lain")
 local menubar = require("menubar")
 local freedesktop = require("freedesktop")
 local hotkeys_popup = require("awful.hotkeys_popup")
@@ -403,7 +401,6 @@ awful.screen.connect_for_each_screen(function(s)
 			layout = wibox.layout.fixed.horizontal,
 			mykeyboardlayout,
 			wibox.widget.systray(),
-			battery(),
 			mytextclock,
 			s.mylayoutbox,
 		},

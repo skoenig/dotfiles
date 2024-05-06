@@ -119,7 +119,6 @@ alias password="apg -n 1 -a 0 -m 15 -x 15"
 alias translate="grep -hwi /usr/share/dict/de-en.txt /usr/share/trans/de-en -e"
 alias trash='trash-put'
 alias wakehack='wakeonlan 00:23:54:2f:2e:a5'
-alias bat='upower -i /org/freedesktop/UPower/devices/battery_BAT1 | grep -E "state|time\ to|percentage"'
 alias feh='feh --force-aliasing --scale-down '
 alias sakura='sakura --working-directory ~/.config/sakura'
 alias dockerclean="docker system prune -f"
