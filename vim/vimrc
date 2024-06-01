@@ -31,7 +31,7 @@ Plug 'junegunn/limelight.vim'
 Plug 'kien/ctrlp.vim'
 Plug 'jremmen/vim-ripgrep'
 Plug 'jamessan/vim-gnupg'
-Plug 'vim-syntastic/syntastic'              " Syntax checker + pep8
+Plug 'dense-analysis/ale'
 Plug 'psf/black', { 'branch': 'stable' }    " Python autoformat
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-eunuch'
@@ -230,7 +230,6 @@ set statusline +=%7*/%L\ %*             "total lines
 set statusline +=%2*\ cols:%4c\ %*      "column number
 set statusline +=%1*%7P\ %*             "percentage through file
 set statusline+=%#warningmsg#
-" set statusline+=\ %{SyntasticStatuslineFlag()}\     " error counts
 set statusline+=%*
 
 " NERDTree
@@ -248,24 +247,6 @@ let g:ctrlp_custom_ignore = {
     \ 'file': '\.pyc$\|\.pyo$\|\.rbc$|\.rbo$\|\.class$\|\.o$\|\~$\|\.DS_Store',
     \ 'link': 'some_bad_symbolic_links',
     \ }
-
-" syntastic
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
-let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
-let g:syntastic_python_checkers = ['flake8']
-
-function! FindConfig(prefix, what, where)
-    let cfg = findfile(a:what, escape(a:where, ' ') . ';')
-    return cfg !=# '' ? ' ' . a:prefix . ' ' . shellescape(cfg) : ''
-endfunction
-
-autocmd FileType python let b:syntastic_python_flake8_args =
-    \ get(g:, 'syntastic_python_flake8_args', '') .
-    \ FindConfig('--config', '.flake8', expand('<afile>:p:h', 1))
 
 " configure black and run on file close.
 let g:black_skip_string_normalization = 1
