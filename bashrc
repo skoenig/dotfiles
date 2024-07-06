@@ -124,24 +124,6 @@ alias sakura='sakura --working-directory ~/.config/sakura'
 alias dockerclean="docker system prune -f"
 alias whatthecommit="curl -s http://whatthecommit.com/index.txt"
 
-# mpc aliases
-alias mpc='mpc --format "%position% %artist%\t\t%album%\t\t%track%. %title%" '
-mpc_save () {
-    mpc save $(date +%F_%H-%M)
-}
-
-mpc_addsong  () {
-    mpc search any "$*" | mpc add
-}
-
-mpc_addrandom () {
-    mpc listall | sed -n $[RANDOM % $(mpc stats | grep Songs | awk '{print $2}')+1]p | mpc add
-}
-
-mpc_jump () {
-    mpc playlist | grep -i "$*" | grep -o '^[0-9]\+' | head -1 | xargs mpc play
-}
-
 # uses https://github.com/cli/cli
 pullrequest () {
     git push -u origin HEAD
