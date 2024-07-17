@@ -31,6 +31,7 @@ link_dotfile config/spectrwm
 link_dotfile config/markdownlint
 link_dotfile config/systemd/user/geoclue-agent.service
 link_dotfile config/user-dirs.dirs
+link_dotfile config/gtk-3.0/gtk.css
 link_dotfile bashrc
 link_dotfile gitconfig
 link_dotfile gitignore
