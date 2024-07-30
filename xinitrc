@@ -24,6 +24,7 @@ xsetroot -cursor_name left_ptr &
 [ -f ~/.Xresources ] && xrdb -merge ~/.Xresources
 
 ## GNOME PolicyKit and Keyring
+# shellcheck disable=SC2046
 eval $(gnome-keyring-daemon --start --components=pkcs11,secrets,ssh,gpg)
 export GNOME_KEYRING_CONTROL GNOME_KEYRING_PID GPG_AGENT_INFO SSH_AUTH_SOCK
 
