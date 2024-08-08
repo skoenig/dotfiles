@@ -314,5 +314,12 @@ autocmd BufNewFile,BufRead *.yml,*.yaml setlocal filetype=yaml ts=2 sw=2 sts=2 e
 autocmd BufNewFile,BufRead *.{md,mdx,mdown,mkd,mkdn,markdown,mdwn} setlocal filetype=markdown syntax=markdown wrap
 autocmd BufNewFile,BufRead Makefile,*.mk setlocal noexpandtab
 
+" save folding levels
+augroup remember_folds
+  autocmd!
+  autocmd BufWinLeave * mkview
+  autocmd BufWinEnter * silent! loadview
+augroup END
+
 " airline
 let g:airline_powerline_fonts = 1
