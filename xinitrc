@@ -5,10 +5,11 @@
 # ln -s ~/.xinitrc ~/.xprofile
 
 ## 250 ms delay and 25 cps (characters per second) repeat rate.
-xset r rate 250 25 &
+xset r rate 250 25
 
 ## Turn on/off system beep
-xset b off &
+xset b off
+xset b 0 0 0
 
 ## turn off display blankening
 xset s off
