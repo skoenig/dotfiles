@@ -323,3 +323,8 @@ augroup END
 
 " airline
 let g:airline_powerline_fonts = 1
+
+function! TitleCase()
+    exec '%s/\<./\u&/g'
+endfunction
+nmap <leader>tc :call TitleCase()<CR>
