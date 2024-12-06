@@ -127,7 +127,7 @@ alias whatthecommit="curl -s http://whatthecommit.com/index.txt"
 # uses https://github.com/cli/cli
 pullrequest () {
     git push -u origin HEAD
-    gh pr create --fill --web
+    gh pr create --fill-verbose --web
 }
 
 commitagain () {
