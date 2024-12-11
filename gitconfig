@@ -4,6 +4,8 @@
     whitespace = trailing-space,space-before-tab
 [alias]
     lg = log --color --graph --pretty=format:'%Cred%h%Creset%C(yellow)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset'
+[init]
+	defaultBranch = main
 [color]
     ui = auto
 [diff]
@@ -16,4 +18,3 @@
     insteadOf = https://github.com/
 [include]
     path = ~/.gitconfig.local
-
