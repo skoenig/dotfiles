@@ -28,14 +28,14 @@ Plug 'drewtempelmeyer/palenight.vim'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'vim-airline/vim-airline'
 Plug 'junegunn/limelight.vim'
-Plug 'kien/ctrlp.vim'
+Plug 'ctrlpvim/ctrlp.vim'
 Plug 'jremmen/vim-ripgrep'
 Plug 'jamessan/vim-gnupg'
 Plug 'dense-analysis/ale'
 Plug 'psf/black', { 'branch': 'stable' }    " Python autoformat
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-eunuch'
-Plug 'plasticboy/vim-markdown', { 'for': 'markdown', 'commit': '3fcde7215e22913f004c2836fd46ff61746be6db' }
+Plug 'preservim/vim-markdown'
 Plug 'vim-scripts/buftabs'
 Plug 'godlygeek/tabular'
 Plug 'vimwiki/vimwiki'
@@ -245,7 +245,6 @@ set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc,*~"
 let g:ctrlp_custom_ignore = {
     \ 'dir': '\.git$\|\.hg$\|\.svn$\|node_modules',
     \ 'file': '\.pyc$\|\.pyo$\|\.rbc$|\.rbo$\|\.class$\|\.o$\|\~$\|\.DS_Store',
-    \ 'link': 'some_bad_symbolic_links',
     \ }
 
 " configure black and run on file close.
