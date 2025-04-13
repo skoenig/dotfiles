@@ -1,4 +1,4 @@
-# soekoe does dotfiles
+# skoenigs dotfiles
 
 <p align="center">
   <img src="https://github.com/skoenig/dotfiles/blob/main/icon.png?raw=true" alt="dotfiles logo"/>
@@ -6,7 +6,7 @@
   <i>Crafting a digital home, one dotfile at a time.</i>
 </p>
 
-This dotfiles repo contains configurations and customizations for bash, awesome, vim, git and some other tools I use frequently for my very own needs. YMMV.
+This dotfiles repo contains configurations and customizations for bash, awesomewm, vim, git and some other tools I use frequently. YMMV.
 
 ## Installation
 
