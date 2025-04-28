@@ -45,17 +45,6 @@ Plug 'hashivim/vim-terraform'
 filetype plugin indent on " required!
 call plug#end()
 
-" remove trailing whitespaces
-autocmd BufWritePre * %s/\s\+$//e
-
-" remove trailing empty lines
-function TrimEndLines()
-    let save_cursor = getpos(".")
-    silent! %s#\($\n\s*\)\+\%$##
-    call setpos('.', save_cursor)
-endfunction
-autocmd BufWritePre * call TrimEndLines()
-
 " Enable syntax highlighting
 if has('syntax') && !exists('g:syntax_on')
   syntax enable
@@ -252,8 +241,16 @@ let g:black_skip_string_normalization = 1
 autocmd BufWritePre *.py execute ':Black'
 
 " terraform
-let g:terraform_align=1
-let g:terraform_fmt_on_save=1
+function! CompressEmptyLines()
+    exec '%s/^\n\+/\r/'
+endfunction
+autocmd BufWritePre *.tf,*.tfvars,*.tftest.hcl call CompressEmptyLines()
+
+let g:ale_fixers = {
+\   '*': ['remove_trailing_lines', 'trim_whitespace'],
+\   'terraform': ['terraform', 'remove_trailing_lines', 'trim_whitespace'],
+\}
+let g:ale_fix_on_save = 1
 
 " markdown
 let g:vim_markdown_folding_style_pythonic = 1
