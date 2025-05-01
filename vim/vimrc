@@ -32,7 +32,6 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'jremmen/vim-ripgrep'
 Plug 'jamessan/vim-gnupg'
 Plug 'dense-analysis/ale'
-Plug 'psf/black', { 'branch': 'stable' }    " Python autoformat
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-eunuch'
 Plug 'preservim/vim-markdown'
@@ -236,21 +235,22 @@ let g:ctrlp_custom_ignore = {
     \ 'file': '\.pyc$\|\.pyo$\|\.rbc$|\.rbo$\|\.class$\|\.o$\|\~$\|\.DS_Store',
     \ }
 
-" configure black and run on file close.
-let g:black_skip_string_normalization = 1
-autocmd BufWritePre *.py execute ':Black'
+" Linters
+let g:ale_linters = { 'python': ['ruff'] }
+
+" Fixers
+let g:ale_fixers = {
+\   '*': ['remove_trailing_lines', 'trim_whitespace'],
+\   'terraform': ['terraform', 'remove_trailing_lines', 'trim_whitespace'],
+\   'python': ['ruff', 'ruff_format'],
+\}
+let g:ale_fix_on_save = 1
 
 " terraform
 function! CompressEmptyLines()
     exec '%s/^\n\+/\r/'
 endfunction
 autocmd BufWritePre *.tf,*.tfvars,*.tftest.hcl call CompressEmptyLines()
-
-let g:ale_fixers = {
-\   '*': ['remove_trailing_lines', 'trim_whitespace'],
-\   'terraform': ['terraform', 'remove_trailing_lines', 'trim_whitespace'],
-\}
-let g:ale_fix_on_save = 1
 
 " markdown
 let g:vim_markdown_folding_style_pythonic = 1
