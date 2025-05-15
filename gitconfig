@@ -1,13 +1,13 @@
 [core]
-    editor = vim
-    excludesfile = ~/.gitignore
-    whitespace = trailing-space,space-before-tab
+	editor = vim
+	excludesfile = ~/.gitignore
+	whitespace = trailing-space,space-before-tab
 [alias]
-    lg = log --color --graph --pretty=format:'%Cred%h%Creset%C(yellow)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset'
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset%C(yellow)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset'
 [init]
 	defaultBranch = main
 [color]
-    ui = auto
+	ui = auto
 [diff]
 	renames = copies
 	algorithm = histogram
@@ -29,6 +29,6 @@
 [tag]
 	sort = version:refname
 [url "ssh://git@github.com/"]
-    insteadOf = https://github.com/
+	insteadOf = https://github.com/
 [include]
-    path = ~/.gitconfig.local
+	path = ~/.gitconfig.local
