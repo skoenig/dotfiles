@@ -114,15 +114,12 @@ alias df='df -hP'
 alias more=less
 alias free='free -m'
 alias findbigfiles="find . -type f -printf '%s\t\"%p\"\n' | sort -n"
-alias emacs='emacs -nw'
-alias password="apg -n 1 -a 0 -m 15 -x 15"
-alias translate="grep -hwi /usr/share/dict/de-en.txt /usr/share/trans/de-en -e"
 alias trash='trash-put'
-alias wakehack='wakeonlan 00:23:54:2f:2e:a5'
 alias feh='feh --force-aliasing --scale-down '
 alias sakura='sakura --working-directory ~/.config/sakura'
 alias dockerclean="docker system prune -f"
-alias whatthecommit="curl -s http://whatthecommit.com/index.txt"
+alias copy="xclip -sel clip"
+alias paste="xclip -sel clip -o"
 
 # uses https://github.com/cli/cli
 pullrequest () {
