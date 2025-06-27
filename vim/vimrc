@@ -41,7 +41,6 @@ Plug 'vimwiki/vimwiki'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'hashivim/vim-terraform'
 
-filetype plugin indent on " required!
 call plug#end()
 
 " Enable syntax highlighting
@@ -54,13 +53,6 @@ if maparg('<C-L>', 'n') ==# ''
   nnoremap <silent> <C-L> :nohlsearch<CR><C-L>
 endif
 
-if !&scrolloff
-  set scrolloff=1
-endif
-if !&sidescrolloff
-  set sidescrolloff=5
-endif
-set display+=lastline
 
 if &listchars ==# 'eol:$'
   set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
@@ -120,53 +112,54 @@ filetype on           " Enable filetype detection
 filetype indent on    " Enable filetype-specific indenting
 filetype plugin on    " Enable filetype-specific plugins
 
-let mapleader = ","   " use easy to type localleader instead of '\'
-set encoding=utf-8    " set encoding to unicode
-set wrap              " show long lines wrapped
-set hlsearch          " highlight matched search patterns
-set ignorecase        " No case in searches (has to be set for option 'smartcase')
-set smartcase         " No case in searches, unless the query contains upper case characters
-set hidden            " Let us move between buffers without writing them. Don't :q! or :qa! frivolously!
-set number            " show line numbers
-set cursorline        " highlight current line
-set ruler             " show the cursor position all the time
-set showcmd           " display incomplete commands
-set showmode          " show Insert, Replace or Visual mode in the last line
-set ttyfast           " fast scrolling
-set shiftwidth=4      " amout of spaces < and > uses
-set softtabstop=4
-set tabstop=4         " spaces to set tabwidth to
-set expandtab         " convert tabs to spaces
-set foldlevelstart=1
-set textwidth=0       " textwidth used by used for wrapping
-set formatoptions+=t  " automatic wrapping
-set autoindent
-set backspace=indent,eol,start
-set complete-=i
-set showmatch
-set smarttab
-set autoread
-set autowrite
-set fileformats+=mac
-set nrformats-=octal
-set shiftround
-set ttimeout
-set ttimeoutlen=50
-set incsearch
-set laststatus=2
-set wildmenu
-set langmenu=en
-set helplang=en
-set relativenumber
-set novisualbell
-set colorcolumn=80
-set scrolloff=10
-set sidescrolloff=10
-set backup            " keep backup files
-set backupdir=~/.cache//
-set directory=~/.cache//
-set undodir=~/.cache//
-set diffopt+=iwhite
+let mapleader = ","               " use easy to type localleader instead of '\'
+set encoding=utf-8                " set encoding to unicode
+set wrap                          " show long lines wrapped
+set hlsearch                      " highlight matched search patterns
+set ignorecase                    " no case in searches (has to be set for option 'smartcase')
+set smartcase                     " no case in searches, unless the query contains upper case characters
+set hidden                        " let us move between buffers without writing them. Don't :q! or :qa! frivolously!
+set number                        " show line numbers
+set cursorline                    " highlight current line
+set ruler                         " show the cursor position all the time
+set showcmd                       " display incomplete commands
+set showmode                      " show Insert, Replace or Visual mode in the last line
+set ttyfast                       " fast scrolling
+set shiftwidth=4                  " amount of spaces < and > uses
+set softtabstop=4                 " number of spaces that a <Tab> counts for while performing editing operations
+set tabstop=4                     " spaces to set tabwidth to
+set expandtab                     " convert tabs to spaces
+set foldlevelstart=1              " initial fold level
+set textwidth=0                   " textwidth used for wrapping
+set formatoptions+=t              " automatic wrapping
+set autoindent                    " automatically indent new lines
+set backspace=indent,eol,start    " allow backspace to delete indent, end of line, and start of insert
+set complete-=i                   " do not insert matches in insert mode
+set showmatch                     " show matching brackets
+set smarttab                      " insert blanks on a tab
+set autoread                      " automatically read the file when changed externally
+set autowrite                     " automatically write the file when changed
+set fileformats+=mac              " add Mac file format
+set nrformats-=octal              " remove octal number format
+set shiftround                    " round indent to multiple of 'shiftwidth'
+set ttimeout                      " timeout for key codes
+set ttimeoutlen=50                " timeout length for key codes
+set incsearch                     " incremental search
+set laststatus=2                  " always show the status line
+set wildmenu                      " enable wildmenu for command-line completion
+set langmenu=en                   " set language menu to English
+set helplang=en                   " set help language to English
+set relativenumber                " show relative line numbers
+set novisualbell                  " disable visual bell
+set colorcolumn=80                " highlight column 80
+set scrolloff=1                   " minimum lines to keep above/below cursor
+set sidescrolloff=5               " minimum columns to keep left/right of cursor
+set display+=lastline             " always show the last line
+set backup                        " keep backup files
+set backupdir=~/.cache//          " set backup directory
+set directory=~/.cache//          " set directory for swap files
+set undodir=~/.cache//            " set directory for undo files
+set diffopt+=iwhite               " ignore whitespace in diff
 
 " toggle copy & paste mode
 set pastetoggle=<F2>
