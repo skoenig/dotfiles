@@ -19,5 +19,6 @@
   },
   "no-duplicate-heading": {
     "siblings_only": true
-  }
+  },
+  "link-image-reference-definitions": false
 }
