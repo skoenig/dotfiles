@@ -239,11 +239,12 @@ let g:ale_fixers = {
 \}
 let g:ale_fix_on_save = 1
 
-" terraform
 function! CompressEmptyLines()
-    exec '%s/^\n\+/\r/'
+    let l = winsaveview()
+    silent! %s/^\n\+/\r/
+    call winrestview(l)
 endfunction
-autocmd BufWritePre *.tf,*.tfvars,*.tftest.hcl call CompressEmptyLines()
+autocmd BufWritePre *.md,*.tf,*.tfvars,*.tftest.hcl call CompressEmptyLines()
 
 " markdown
 let g:vim_markdown_folding_style_pythonic = 1
