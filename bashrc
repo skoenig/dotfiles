@@ -201,4 +201,7 @@ command -v "kubectl" &>/dev/null && source <(kubectl completion bash)
 alias k='kubectl '
 complete -F __start_kubectl k
 
+# env var management via .envrc
+eval "$(direnv hook bash)"
+
 [ -f "${HOME}/.bash_local" ] && source "${HOME}/.bash_local"
