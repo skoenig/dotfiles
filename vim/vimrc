@@ -37,9 +37,14 @@ Plug 'tpope/vim-eunuch'
 Plug 'preservim/vim-markdown'
 Plug 'vim-scripts/buftabs'
 Plug 'godlygeek/tabular'
-Plug 'vimwiki/vimwiki'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'hashivim/vim-terraform'
+"Plug 'vimwiki/vimwiki'
+" vimwiki bug: the longer a markdown list gets, the longer it takes to insert
+" a new item takes: https://github.com/vimwiki/vimwiki/issues/1387
+" use wiki.vim for now, as it is more actively developed
+Plug 'lervag/wiki.vim'
+Plug 'bullets-vim/bullets.vim'
 
 call plug#end()
 
@@ -252,24 +257,23 @@ let g:vim_markdown_folding_disabled = 0
 let g:vim_markdown_frontmatter = 1
 let g:vim_markdown_conceal = 0
 
-" vimwiki
-let g:vimwiki_list = [{ 'path': '~/Sync/wiki/',
-                        \'syntax': 'markdown',
-                        \'ext': '.md',
-                        \'diary_rel_path': 'journal/',
-                        \'diary_index': 'index'
-                        \}]
-let g:vimwiki_use_calendar = 1
-let g:vimwiki_folding = 'expr'
-let g:vimwiki_global_ext = 0
-let g:vimwiki_hl_cb_checked = 2
-let g:vimwiki_markdown_link_ext = 1
-let g:vimwiki_dir_link = 'index'
-let g:vimwiki_auto_header = 1
-let g:vimwiki_listsyms = ' .oOx'
+" wiki.vim
+let g:wiki_root = '~/Sync/wiki'
+let g:wiki_filetypes = ['md']
+let g:wiki_mappings_local_journal = {
+          \ '<plug>(wiki-journal-prev)' : '<leader><up>',
+          \ '<plug>(wiki-journal-next)' : '<leader><down>',
+          \}
+
+" bullet lists
+let g:bullets_outline_levels = ['ROM', 'ABC', 'num', 'abc', 'rom', 'std-']
+let g:bullets_renumber_on_change = 0 " default = 1 makes even unnumbered lists slow, if they are long enough
+let g:bullets_checkbox_markers = ' .oOx'
+let g:bullets_custom_mappings = [
+    \ ['nmap', '<C-x>', '<Plug>(bullets-toggle-checkbox)'],
+\ ]
+
 nmap <Leader>tt :e ~/Sync/wiki/todo/todo.md<CR>
-nmap <Leader><Up> <Plug>VimwikiDiaryPrevDay
-nmap <Leader><Down> <Plug>VimwikiDiaryNextDay
 
 " Function to insert a h1 header derived from filename and a timestamp
  function! InsertWikiHeader()
