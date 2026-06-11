@@ -34,7 +34,7 @@ Plug 'jamessan/vim-gnupg'
 Plug 'dense-analysis/ale'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-eunuch'
-Plug 'preservim/vim-markdown'
+Plug 'preservim/vim-markdown', { 'do': 'patch -p1 < ' . expand('~/.vim/vim-markdown-pr538.patch') }
 Plug 'vim-scripts/buftabs'
 Plug 'godlygeek/tabular'
 Plug 'editorconfig/editorconfig-vim'

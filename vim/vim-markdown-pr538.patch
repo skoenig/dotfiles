@@ -1,0 +1,29 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: KSR-Yasuda <31273423+KSR-Yasuda@users.noreply.github.com>
+Date: Fri, 15 Jan 2021 14:27:00 +0900
+Subject: [PATCH] Avoid Markdown-folding in diff mode
+
+Upstream PR: https://github.com/preservim/vim-markdown/pull/538
+
+---
+ after/ftplugin/markdown.vim | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+
+--- a/after/ftplugin/markdown.vim
++++ b/after/ftplugin/markdown.vim
+@@ -194,8 +194,10 @@ function! s:MarkdownSetupFolding()
+             if get(g:, 'vim_markdown_override_foldtext', 1)
+                 setlocal foldtext=Foldtext_markdown()
+             endif
+         endif
+-        setlocal foldexpr=Foldexpr_markdown(v:lnum)
+-        setlocal foldmethod=expr
++        if ( &foldexpr ==# "0" || &foldexpr ==# "" ) && &foldmethod != "diff"
++            setlocal foldexpr=Foldexpr_markdown(v:lnum)
++            setlocal foldmethod=expr
++        endif
+     endif
+ endfunction
+ 
+-- 
+2.30.0
