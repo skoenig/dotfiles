@@ -154,7 +154,6 @@ set laststatus=2                  " always show the status line
 set wildmenu                      " enable wildmenu for command-line completion
 set langmenu=en                   " set language menu to English
 set helplang=en                   " set help language to English
-set relativenumber                " show relative line numbers
 set novisualbell                  " disable visual bell
 set colorcolumn=80                " highlight column 80
 set scrolloff=1                   " minimum lines to keep above/below cursor
@@ -170,7 +169,7 @@ set diffopt+=iwhite               " ignore whitespace in diff
 set pastetoggle=<F2>
 
 " toggle line numbers
-nnoremap <F3> :set nonumber! \| set norelativenumber!<CR>
+nnoremap <F3> :set nonumber!<CR>
 
 " toggle cursorline highlighting
 nnoremap <F4> :set nocursorline!<CR>
