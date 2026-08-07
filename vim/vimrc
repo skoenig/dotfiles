@@ -34,7 +34,6 @@ Plug 'jamessan/vim-gnupg'
 Plug 'dense-analysis/ale'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-eunuch'
-Plug 'preservim/vim-markdown', { 'do': 'patch -p1 < ' . expand('~/.vim/vim-markdown-pr538.patch') }
 Plug 'vim-scripts/buftabs'
 Plug 'godlygeek/tabular'
 Plug 'editorconfig/editorconfig-vim'
@@ -245,16 +244,16 @@ let g:ale_fix_on_save = 1
 
 function! CompressEmptyLines()
     let l = winsaveview()
-    silent! %s/^\n\+/\r/
+    silent! keeppatterns %s/\n\{3,}/\r\r/e
     call winrestview(l)
 endfunction
 autocmd BufWritePre *.md,*.tf,*.tfvars,*.tftest.hcl call CompressEmptyLines()
 
-" markdown
-let g:vim_markdown_folding_style_pythonic = 1
-let g:vim_markdown_folding_disabled = 0
-let g:vim_markdown_frontmatter = 1
-let g:vim_markdown_conceal = 0
+" markdown: highlight these languages inside fenced code blocks. Unlike
+" vim-markdown, the runtime syntax resolves this list once at load instead of
+" rescanning the buffer on every insert-mode transition.
+let g:markdown_fenced_languages = ['yaml', 'bash=sh', 'sh', 'json', 'hcl', 'python', 'diff']
+let g:markdown_minlines = 100
 
 " wiki.vim
 let g:wiki_root = '~/Sync/wiki'
@@ -304,14 +303,14 @@ autocmd BufWritePre *.{md,mdx,mdown,mkd,mkdn,markdown,mdwn} call LastModified()
 
 " filetype detection
 autocmd BufNewFile,BufRead *.yml,*.yaml setlocal filetype=yaml ts=2 sw=2 sts=2 et
-autocmd BufNewFile,BufRead *.{md,mdx,mdown,mkd,mkdn,markdown,mdwn} setlocal filetype=markdown syntax=markdown wrap
 autocmd BufNewFile,BufRead Makefile,*.mk setlocal noexpandtab
 
 " save folding levels
 augroup remember_folds
   autocmd!
-  autocmd BufWinLeave * mkview
-  autocmd BufWinEnter * silent! loadview
+  " Only real file buffers: mkview errors on help, quickfix and plugin windows.
+  autocmd BufWinLeave ?* if empty(&buftype) && !empty(expand('<afile>')) | silent! mkview | endif
+  autocmd BufWinEnter ?* if empty(&buftype) && !empty(expand('<afile>')) | silent! loadview | endif
 augroup END
 
 " airline
