@@ -48,7 +48,7 @@ then
     fi
 fi
 
-# set default rc.lua as fallback (should be symlink to the most recent config)
+# overwrite by custom awesomewm config, can be a symlink
 if [ -r $HOME/.config/awesome/rc.lua ]
 then
     config="--config $HOME/.config/awesome/rc.lua"
